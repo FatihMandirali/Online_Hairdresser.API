@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Online_Hairdresser.API", "Online_Hairdresser.API\Online_Hairdresser.API.csproj", "{0618C96B-CBC2-4110-AB21-58270014F5FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{6D9D4456-400C-41F0-AE0B-20C3D8A070D1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Online_Hairdresser.Data", "Online_Hairdresser.Data\Online_Hairdresser.Data.csproj", "{32754025-DB72-4D22-9225-C316582D8C96}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Online_Hairdresser.Core", "Online_Hairdresser.Core\Online_Hairdresser.Core.csproj", "{CC2D1EE2-2389-4543-B8DE-F980BA566B9F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Online_Hairdresser.Models", "Online_Hairdresser.Models\Online_Hairdresser.Models.csproj", "{12D73044-F8B9-48F6-80C5-48A932C3EB84}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{38403ABB-D5D2-48D1-83D6-3722406245EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0618C96B-CBC2-4110-AB21-58270014F5FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0618C96B-CBC2-4110-AB21-58270014F5FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0618C96B-CBC2-4110-AB21-58270014F5FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0618C96B-CBC2-4110-AB21-58270014F5FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32754025-DB72-4D22-9225-C316582D8C96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32754025-DB72-4D22-9225-C316582D8C96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32754025-DB72-4D22-9225-C316582D8C96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32754025-DB72-4D22-9225-C316582D8C96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC2D1EE2-2389-4543-B8DE-F980BA566B9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC2D1EE2-2389-4543-B8DE-F980BA566B9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC2D1EE2-2389-4543-B8DE-F980BA566B9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC2D1EE2-2389-4543-B8DE-F980BA566B9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12D73044-F8B9-48F6-80C5-48A932C3EB84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12D73044-F8B9-48F6-80C5-48A932C3EB84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12D73044-F8B9-48F6-80C5-48A932C3EB84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12D73044-F8B9-48F6-80C5-48A932C3EB84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38403ABB-D5D2-48D1-83D6-3722406245EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38403ABB-D5D2-48D1-83D6-3722406245EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38403ABB-D5D2-48D1-83D6-3722406245EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38403ABB-D5D2-48D1-83D6-3722406245EF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{32754025-DB72-4D22-9225-C316582D8C96} = {6D9D4456-400C-41F0-AE0B-20C3D8A070D1}
+		{CC2D1EE2-2389-4543-B8DE-F980BA566B9F} = {6D9D4456-400C-41F0-AE0B-20C3D8A070D1}
+		{12D73044-F8B9-48F6-80C5-48A932C3EB84} = {6D9D4456-400C-41F0-AE0B-20C3D8A070D1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6E675D1A-7305-419B-B02C-28007EBA710C}
+	EndGlobalSection
+EndGlobal
