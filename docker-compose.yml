@@ -49,6 +49,16 @@ services:
       - postgres
     links:
       - postgres  
+  frontend:
+    container_name: frontend
+    image: fthmndrli/online-hairdresser-ui-admin
+    ports:
+      - "8085:80"
+    restart: always
+    environment:
+       VUE_APP_API_URL: http://localhost:98765/api
+    depends_on:
+      - online_hairdresser.api
 
 volumes:
     postgres:

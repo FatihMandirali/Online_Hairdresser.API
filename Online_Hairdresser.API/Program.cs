@@ -35,6 +35,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("corsapp");
+
 app.UseMiddleware<ExceptionCatcherMiddleware>();
 
 app.UseAuthentication();
