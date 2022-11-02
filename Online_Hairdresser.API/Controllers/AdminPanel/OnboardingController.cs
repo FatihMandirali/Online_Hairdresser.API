@@ -24,7 +24,7 @@ namespace Online_Hairdresser.API.Controllers.AdminPanel
         }
 
         /// <summary>
-        /// OnBoarding List Service
+        /// OnBoarding List Service...
         /// </summary>
         /// <returns></returns>
         [HttpGet("List")]
