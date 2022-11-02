@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FM.Project.BaseLibrary.BaseResponseModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Online_Hairdresser.API.Localize;
@@ -27,10 +28,11 @@ namespace Online_Hairdresser.API.Controllers.AdminPanel
         /// <param name="postLogin"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<BaseResponse<object>> PostLogin([FromBody] LoginRequest postLogin)
+        public async Task<FMBaseResponse<object>> PostLogin([FromBody] LoginRequest postLogin)
         {
+            throw new Exception();
             var response = await _loginService.Login(postLogin);
-            return new BaseResponse<object>(ProcessStatusEnum.Success, null, response.Item1);
+            return new FMBaseResponse<object>(FMProcessStatusEnum.Success, null, response.Item1);
         }
 
     }

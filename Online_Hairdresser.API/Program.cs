@@ -1,7 +1,7 @@
+using FM.Project.BaseLibrary.BaseGenericException;
 using Microsoft.Extensions.Options;
 using Online_Hairdresser.API.Extensions;
 using Online_Hairdresser.API.Extensions.SeedData;
-using Online_Hairdresser.API.Middleware;
 using Online_Hairdresser.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -37,7 +37,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors("corsapp");
 
-app.UseMiddleware<ExceptionCatcherMiddleware>();
+app.UseMiddleware<FMExceptionCatcherMiddleware>();
 
 app.UseAuthentication();
 

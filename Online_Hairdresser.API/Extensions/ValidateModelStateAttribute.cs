@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using FM.Project.BaseLibrary.BaseResponseModel;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Online_Hairdresser.Models.Enums;
 using Online_Hairdresser.Models.Models.BaseModel;
@@ -16,7 +17,7 @@ namespace Online_Hairdresser.API.Extensions
                         .Select(v => v.ErrorMessage)
                         .ToList();
 
-                var responseObj = new BaseResponse<object>(ProcessStatusEnum.BadRequest, new FriendlyMessage { Message = errors.FirstOrDefault() ?? "Lütfen İsteğinizi Kontrol Edin." }, null);
+                var responseObj = new FMBaseResponse<object>(FMProcessStatusEnum.BadRequest, new FMFriendlyMessage { Message = errors.FirstOrDefault() ?? "Lütfen İsteğinizi Kontrol Edin." }, null);
 
 
                 context.Result = new JsonResult(responseObj)

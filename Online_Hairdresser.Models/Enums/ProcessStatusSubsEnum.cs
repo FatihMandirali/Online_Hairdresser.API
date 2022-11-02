@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Online_Hairdresser.Models.Enums
 {
-    public enum ProcessStatusEnum
+    public enum ProcessStatusSubsEnum
     {
         Undefined = 0,
         Success = 200,

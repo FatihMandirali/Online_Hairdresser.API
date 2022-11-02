@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
 using FluentValidation.AspNetCore;
+using FM.Project.BaseLibrary.BaseGenericException;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Online_Hairdresser.API.Middleware;
 using Online_Hairdresser.Core.Helpers.JWT;
 using Online_Hairdresser.Core.IServices.AdminPanel;
 using Online_Hairdresser.Core.Mapping;
@@ -157,7 +157,7 @@ namespace Online_Hairdresser.API.Extensions
             #endregion
 
             #region ExceptionService
-            services.AddScoped<ExceptionCatcherMiddleware>();
+            services.AddScoped<FMExceptionCatcherMiddleware>();
             #endregion
 
             #region Authentication

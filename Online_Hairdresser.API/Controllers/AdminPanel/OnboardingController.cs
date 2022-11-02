@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using FM.Project.BaseLibrary.BaseResponseModel;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Online_Hairdresser.API.Localize;
@@ -27,10 +28,10 @@ namespace Online_Hairdresser.API.Controllers.AdminPanel
         /// </summary>
         /// <returns></returns>
         [HttpGet("List")]
-        public async Task<BaseResponse<List<OnboardingResponse>>> GetOnboardingList()
+        public async Task<FMBaseResponse<List<OnboardingResponse>>> GetOnboardingList()
         {
             var response = await _onboardingService.OnBoardingList();
-            return new BaseResponse<List<OnboardingResponse>>(ProcessStatusEnum.Success, null, response);
+            return new FMBaseResponse<List<OnboardingResponse>>(FMProcessStatusEnum.Success, null, response);
         }
     }
 }
