@@ -15,12 +15,14 @@ namespace Online_Hairdresser.API.Controllers.AdminPanel
     public class LoginController : BaseController
     {
         private readonly IStringLocalizer<Resource> _localizer;
+        private readonly ILogger<LoginController> _logger;
         private readonly ILoginService _loginService;
 
-        public LoginController(IStringLocalizer<Resource> localizer, ILoginService loginService)
+        public LoginController(IStringLocalizer<Resource> localizer, ILoginService loginService, ILogger<LoginController> logger)
         {
             _localizer = localizer;
             _loginService = loginService;
+            _logger = logger;
         }
         /// <summary>
         /// Panel Login service
@@ -30,7 +32,7 @@ namespace Online_Hairdresser.API.Controllers.AdminPanel
         [HttpPost]
         public async Task<FMBaseResponse<object>> PostLogin([FromBody] LoginRequest postLogin)
         {
-            throw new Exception();
+            _logger.LogError("login hata");
             var response = await _loginService.Login(postLogin);
             return new FMBaseResponse<object>(FMProcessStatusEnum.Success, null, response.Item1);
         }
