@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Online_Hairdresser.Core\Online_Hairdresser.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DailyLog\" />
+  </ItemGroup>
+
 </Project>

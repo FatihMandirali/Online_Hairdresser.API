@@ -8,11 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Online_Hairdresser.Core.Helpers.JWT;
+using Online_Hairdresser.Core.IServices;
 using Online_Hairdresser.Core.IServices.AdminPanel;
 using Online_Hairdresser.Core.Mapping;
+using Online_Hairdresser.Core.Services;
 using Online_Hairdresser.Core.Services.AdminPanel;
 using Online_Hairdresser.Data;
 using Online_Hairdresser.Models.Enums;
+using Online_Hairdresser.Models.Models.Options;
 using System.Globalization;
 using System.Text;
 
@@ -22,6 +25,16 @@ namespace Online_Hairdresser.API.Extensions
     {
         public static IServiceCollection ServiceCollectionExtension(this IServiceCollection services, IConfiguration configuration)
         {
+            #region AppSettingsOptions
+            var cacheSettings = new CacheSettings();
+            configuration.Bind(nameof(CacheSettings), cacheSettings);
+            services.AddSingleton(cacheSettings);
+            #endregion
+
+            #region MemoryCache
+            services.AddMemoryCache();
+            #endregion
+
             #region Default
             services.AddControllers(options =>
             {
@@ -154,6 +167,7 @@ namespace Online_Hairdresser.API.Extensions
             services.AddScoped<IOnBoardingService, OnBoardingService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ITokenHelper, JwtHelper>();
+            services.AddScoped<IResponseCacheService, ResponseCacheService>();
             #endregion
 
             #region ExceptionService

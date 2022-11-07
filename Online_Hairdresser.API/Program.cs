@@ -3,11 +3,29 @@ using Microsoft.Extensions.Options;
 using Online_Hairdresser.API.Extensions;
 using Online_Hairdresser.API.Extensions.SeedData;
 using Online_Hairdresser.Data;
+using Online_Hairdresser.Models.Models.Options;
 using Serilog;
 using Serilog.Sinks.Elasticsearch;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
+//builder.Host.UseSerilog();
+//Log.Logger = new LoggerConfiguration()
+//    .WriteTo.Console()
+//    .WriteTo.File("./DailyLolog-.txt", rollingInterval: RollingInterval.Day)
+//    .CreateLogger();
+
+var configuration = new ConfigurationBuilder()
+        .SetBasePath(Directory.GetCurrentDirectory())
+        .AddJsonFile("appsettings.json")
+        .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", true)
+        .Build();
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(configuration).Enrich.FromLogContext()
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 // Add services to the container.
 
