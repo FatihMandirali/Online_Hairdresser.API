@@ -20,18 +20,10 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    - task: Docker@2
-      displayName: Build an image
-      inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        tags: |
-          $(tag)
-    - task: Docker@1      
-      inputs:
-        containerregistrytype: 'Container Registry'
-        dockerRegistryEndpoint: 'Docker Hub'
-        command: 'Push an image'
-        imageName: '$(ImageName)'
-      condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
-      displayName: 'Push the Docker image to Dockerhub'          
+      - task: Docker@2
+        inputs:
+         containerRegistry: 'Docker Hub'
+         repository: 'fthmndrli/online-hairdresser-api'
+         command: 'buildAndPush'
+         Dockerfile: '**/Dockerfile'
+          
