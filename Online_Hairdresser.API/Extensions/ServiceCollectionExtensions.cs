@@ -16,6 +16,7 @@ using Online_Hairdresser.Core.Services.AdminPanel;
 using Online_Hairdresser.Data;
 using Online_Hairdresser.Models.Enums;
 using Online_Hairdresser.Models.Models.Options;
+using StackExchange.Redis;
 using System.Globalization;
 using System.Text;
 
@@ -25,6 +26,14 @@ namespace Online_Hairdresser.API.Extensions
     {
         public static IServiceCollection ServiceCollectionExtension(this IServiceCollection services, IConfiguration configuration)
         {
+            #region RedisCache
+            services.AddStackExchangeRedisCache(option =>
+            {
+                option.Configuration = configuration.GetConnectionString("Redis"); //localhost:6379,password=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+            });
+            services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis")));
+            #endregion
+
             #region AppSettingsOptions
             var cacheSettings = new CacheSettings();
             configuration.Bind(nameof(CacheSettings), cacheSettings);
@@ -168,6 +177,7 @@ namespace Online_Hairdresser.API.Extensions
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ITokenHelper, JwtHelper>();
             services.AddScoped<IResponseCacheService, ResponseCacheService>();
+            services.AddScoped<IRedisCacheService, RedisCacheService>();
             #endregion
 
             #region ExceptionService

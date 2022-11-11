@@ -31,15 +31,19 @@ namespace Online_Hairdresser.Core.Attributes
             var cacheSettings = context.HttpContext.RequestServices.GetRequiredService<CacheSettings>();
             if (_expireTimeSeconds <= 0) _expireTimeSeconds = cacheSettings.ResponseCacheExpireTimeSeconds;
             
-            var responseCacheService = context.HttpContext.RequestServices.GetRequiredService<IResponseCacheService>();
+            //var responseCacheService = context.HttpContext.RequestServices.GetRequiredService<IResponseCacheService>();
+            //var cacheKey = GenerateCacheKeyFromRequest(context.HttpContext, _isItUserSpesific);
+            //var cacheResponse = responseCacheService.Get(cacheKey); // InMemoryCache
+            
+            var responseCacheService = context.HttpContext.RequestServices.GetRequiredService<IRedisCacheService>();
             var cacheKey = GenerateCacheKeyFromRequest(context.HttpContext, _isItUserSpesific);
-            var cacheResponse = responseCacheService.Get(cacheKey);
+            var cacheResponse = await responseCacheService.GetValueAsync(cacheKey);
 
             if (cacheResponse != null)
             {
                 var contentResult = new ContentResult
                 {
-                    Content = JsonSerializer.Serialize(cacheResponse),
+                    Content = cacheResponse,
                     ContentType = "application/json",
                     StatusCode = 200
                 };
@@ -50,7 +54,7 @@ namespace Online_Hairdresser.Core.Attributes
             var executedContext = await next();
             var result = executedContext.Result as ObjectResult;
             var res = result?.Value;
-            responseCacheService.Set(cacheKey, res, TimeSpan.FromSeconds(_expireTimeSeconds));
+            await responseCacheService.SetValueAsync(cacheKey, JsonSerializer.Serialize(res));
         }
 
         private static string GenerateCacheKeyFromRequest(HttpContext httpContext, bool isItUserSpesific)

@@ -60,25 +60,38 @@ services:
     depends_on:
       - online_hairdresser.api
   elasticsearch:
-    container_name: elasticsearch
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.1
-    ports:
-      - 9200:9200
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.10.1
     environment:
-      - xpack.monitoring.enabled=true
-      - xpack.watcher.enabled=false
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - discovery.type=single-node
-  kibana:
-    container_name: kibana
-    image: docker.elastic.co/kibana/kibana:7.16.1
+      discovery.type: single-node
     ports:
-      - 5601:5601
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ./config/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/elasticsearch.yml
+      - esdata:/usr/share/elasticsearch/data      
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.10.1
+    ports:
+      - "5601:5601"
     depends_on:
       - elasticsearch
-    environment:
-      - ELASTICSEARCH_URL=http://localhost:9200
+  apm-server:
+    image: docker.elastic.co/apm/apm-server:7.10.1
+    ports:
+      - "8200:8200"
+    depends_on:
+      - elasticsearch
+  cache:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    #command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+    volumes: 
+      - cache:/data
 
 volumes:
     postgres:
     pgadmin:
+    esdata:
+    cache:
