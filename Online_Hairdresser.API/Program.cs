@@ -9,6 +9,7 @@ using Serilog;
 using Serilog.Sinks.Elasticsearch;
 using StackExchange.Redis;
 using System.Reflection;
+// dotnet ef --startup-project ../Online_Hairdresser.API/ migrations add EditTables --context OnlineHairdresserDbContext
 
 var builder = WebApplication.CreateBuilder(args);
 

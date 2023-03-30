@@ -24,47 +24,53 @@ namespace Online_Hairdresser.API.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection ServiceCollectionExtension(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ServiceCollectionExtension(this IServiceCollection services,
+            IConfiguration configuration)
         {
             #region RedisCache
+
             services.AddStackExchangeRedisCache(option =>
             {
-                option.Configuration = configuration.GetConnectionString("Redis"); //localhost:6379,password=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
+                option.Configuration =
+                    configuration
+                        .GetConnectionString("Redis"); //localhost:6379,password=eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
             });
-            services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis")));
+            services.AddSingleton<IConnectionMultiplexer>(
+                ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis")));
+
             #endregion
 
             #region AppSettingsOptions
+
             var cacheSettings = new CacheSettings();
             configuration.Bind(nameof(CacheSettings), cacheSettings);
             services.AddSingleton(cacheSettings);
+
             #endregion
 
             #region MemoryCache
+
             services.AddMemoryCache();
+
             #endregion
 
             #region Default
-            services.AddControllers(options =>
-            {
-                options.Filters.Add(typeof(ValidateModelStateAttribute));
-            })
-            .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
+
+            services.AddControllers(options => { options.Filters.Add(typeof(ValidateModelStateAttribute)); })
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
             services.AddEndpointsApiExplorer();
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.SuppressModelStateInvalidFilter = true;
-            });
+            services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
+
             #endregion
 
             #region FluentValidation
-            services.AddFluentValidation(conf =>
-            {
-                conf.RegisterValidatorsFromAssembly(typeof(RolesEnum).Assembly);
-            });
+
+            services.AddFluentValidation(conf => { conf.RegisterValidatorsFromAssembly(typeof(RolesEnum).Assembly); });
+
             #endregion
 
             #region Multi-Language
+
             services.AddLocalization();
 
             services.Configure<RequestLocalizationOptions>(
@@ -79,30 +85,35 @@ namespace Online_Hairdresser.API.Extensions
                     options.DefaultRequestCulture = new RequestCulture(culture: "tr", uiCulture: "tr");
                     options.SupportedCultures = supportedCultures;
                     options.SupportedUICultures = supportedCultures;
-                    options.RequestCultureProviders = new[] { new RouteDataRequestCultureProvider { IndexOfCulture = 1, IndexofUICulture = 1 } };
+                    options.RequestCultureProviders = new[]
+                        { new RouteDataRequestCultureProvider { IndexOfCulture = 1, IndexofUICulture = 1 } };
                 });
 
             services.Configure<RouteOptions>(options =>
             {
                 options.ConstraintMap.Add("culture", typeof(LanguageRouteConstraint));
             });
+
             #endregion
 
             #region Cors
-            services.AddCors(p => p.AddPolicy("corsapp", builder =>
-            {
-                builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-            }));
+
+            services.AddCors(p =>
+                p.AddPolicy("corsapp", builder => { builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader(); }));
+
             #endregion
 
             #region PostgreSql
-            services.AddDbContext<OnlineHairdresserDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("SqlConnection"), npgOptions =>
-                npgOptions.MigrationsAssembly("Online_Hairdresser.Data")
+
+            services.AddDbContext<OnlineHairdresserDbContext>(options => options.UseNpgsql(
+                configuration.GetConnectionString("SqlConnection"), npgOptions =>
+                    npgOptions.MigrationsAssembly("Online_Hairdresser.Data")
             ));
 
             #endregion
 
             #region AutoMapper
+
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AllowNullCollections = true;
@@ -111,9 +122,11 @@ namespace Online_Hairdresser.API.Extensions
 
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+
             #endregion
 
             #region Swagger
+
             services.AddSwaggerGen();
             var securityScheme = new OpenApiSecurityScheme()
             {
@@ -126,19 +139,19 @@ namespace Online_Hairdresser.API.Extensions
             };
 
             var securityReq = new OpenApiSecurityRequirement()
-{
-    {
-        new OpenApiSecurityScheme
-        {
-            Reference = new OpenApiReference
             {
-                Type = ReferenceType.SecurityScheme,
-                Id = "Bearer"
-            }
-        },
-        new string[] {}
-    }
-};
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[] { }
+                }
+            };
 
             var contact = new OpenApiContact()
             {
@@ -170,21 +183,27 @@ namespace Online_Hairdresser.API.Extensions
                 o.AddSecurityDefinition("Bearer", securityScheme);
                 o.AddSecurityRequirement(securityReq);
             });
+
             #endregion
 
             #region Services
+
             services.AddScoped<IOnBoardingService, OnBoardingService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<ITokenHelper, JwtHelper>();
             services.AddScoped<IResponseCacheService, ResponseCacheService>();
             services.AddScoped<IRedisCacheService, RedisCacheService>();
+
             #endregion
 
             #region ExceptionService
+
             services.AddScoped<FMExceptionCatcherMiddleware>();
+
             #endregion
 
             #region Authentication
+
             services.AddAuthentication(o =>
             {
                 o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -208,6 +227,7 @@ namespace Online_Hairdresser.API.Extensions
             });
 
             services.AddAuthorization();
+
             #endregion
 
             return services;
