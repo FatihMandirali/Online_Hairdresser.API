@@ -195,6 +195,7 @@ namespace Online_Hairdresser.API.Extensions
             services.AddScoped<IRedisCacheService, RedisCacheService>();
             services.AddScoped<IThemeService, ThemeService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRegisterService, RegisterService>();
 
             #endregion
 

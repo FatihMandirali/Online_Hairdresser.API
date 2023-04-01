@@ -14,7 +14,14 @@ namespace Online_Hairdresser.Data.Entity
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Password { get; set; }
+        public string NotificationId { get; set; }
         public GenderEnum Gender { get; set; }
         public RolesEnum Role { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+        public PlatformEnum Platform { get; set; }
+        public string Version { get; set; }
+        public string City { get; set; }
+        public string County { get; set; }
     }
 }
