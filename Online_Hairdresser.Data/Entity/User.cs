@@ -15,6 +15,6 @@ namespace Online_Hairdresser.Data.Entity
         public string Phone { get; set; }
         public string Password { get; set; }
         public GenderEnum Gender { get; set; }
-
+        public RolesEnum Role { get; set; }
     }
 }

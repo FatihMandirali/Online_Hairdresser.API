@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Online_Hairdresser.Models.Models.Response.Theme;
 
 namespace Online_Hairdresser.Core.Mapping
 {
@@ -14,6 +15,7 @@ namespace Online_Hairdresser.Core.Mapping
         public OnlineHairdresserMapping()
         {
             CreateMap<OnboardingResponse, Onboarding>().ReverseMap();
+            CreateMap<ThemeResponse, Theme>().ReverseMap();
 
         }
     }

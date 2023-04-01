@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Online_Hairdresser.API.Localize;
-using Online_Hairdresser.Core.IServices.AdminPanel;
+using Online_Hairdresser.Core.IServices;
 using Online_Hairdresser.Models.Enums;
 using Online_Hairdresser.Models.Models.BaseModel;
 using Online_Hairdresser.Models.Models.Response.Login;
 
-namespace Online_Hairdresser.API.Controllers.AdminPanel
+namespace Online_Hairdresser.API.Controllers
 {
-    [Route("{culture:culture}/api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class LoginController : BaseController
     {
@@ -34,6 +34,9 @@ namespace Online_Hairdresser.API.Controllers.AdminPanel
         {
             _logger.LogError("login hata");
             var response = await _loginService.Login(postLogin);
+            if(response.Item1 is null)
+                return new FMBaseResponse<object>(FMProcessStatusEnum.InternalServerError, new FMFriendlyMessage("",_localizer[response.Item2]), null);
+
             return new FMBaseResponse<object>(FMProcessStatusEnum.Success, null, response.Item1);
         }
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Online_Hairdresser.Core.IServices.AdminPanel;
+using Online_Hairdresser.Core.IServices;
 using Online_Hairdresser.Data;
 using Online_Hairdresser.Data.Entity;
 using Online_Hairdresser.Data.Repository;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Online_Hairdresser.Core.Services.AdminPanel
+namespace Online_Hairdresser.Core.Services
 {
     public class OnBoardingService : Repository<Onboarding>, IOnBoardingService
     {

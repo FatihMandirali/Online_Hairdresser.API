@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Online_Hairdresser.Data;
@@ -11,9 +12,10 @@ using Online_Hairdresser.Data;
 namespace Online_Hairdresser.Data.Migrations
 {
     [DbContext(typeof(OnlineHairdresserDbContext))]
-    partial class OnlineHairdresserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230401130900_ThemeTables")]
+    partial class ThemeTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -147,9 +149,6 @@ namespace Online_Hairdresser.Data.Migrations
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("Role")
-                        .HasColumnType("integer");
 
                     b.Property<string>("Surname")
                         .IsRequired()

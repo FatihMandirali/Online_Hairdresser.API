@@ -4,14 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Online_Hairdresser.API.Localize;
 using Online_Hairdresser.Core.Attributes;
-using Online_Hairdresser.Core.IServices.AdminPanel;
+using Online_Hairdresser.Core.IServices;
 using Online_Hairdresser.Models.Enums;
 using Online_Hairdresser.Models.Models.BaseModel;
 using Online_Hairdresser.Models.Models.Response.Onboarding;
 
-namespace Online_Hairdresser.API.Controllers.AdminPanel
+namespace Online_Hairdresser.API.Controllers
 {
-    [Route("{culture:culture}/api/[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class OnboardingController : BaseController
     {

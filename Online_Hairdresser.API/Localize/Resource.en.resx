@@ -126,4 +126,7 @@
   <data name="password_invalid" xml:space="preserve">
     <value>Password Invalid</value>
   </data>
+  <data name="login_error" xml:space="preserve">
+    <value>Email or Password is wrong</value>
+  </data>
 </root>

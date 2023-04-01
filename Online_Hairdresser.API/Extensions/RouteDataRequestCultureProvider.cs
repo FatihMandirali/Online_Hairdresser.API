@@ -15,7 +15,7 @@ namespace Online_Hairdresser.API.Extensions
             string culture = null;
             string uiCulture = null;
 
-            culture = uiCulture = httpContext.Request.Path.Value.Split('/')[IndexOfCulture]?.ToString();
+            culture = uiCulture = httpContext.Request.Headers["Accept-Language"].ToString();
 
             var providerResultCulture = new ProviderCultureResult(culture, uiCulture);
 

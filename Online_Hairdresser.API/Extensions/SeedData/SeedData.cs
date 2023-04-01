@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Online_Hairdresser.Data;
 using Online_Hairdresser.Data.Entity;
+using Online_Hairdresser.Models.Enums;
 using BC = BCrypt.Net.BCrypt;
 
 namespace Online_Hairdresser.API.Extensions.SeedData
@@ -46,7 +47,20 @@ namespace Online_Hairdresser.API.Extensions.SeedData
             await dbContext.Onboardings.AddAsync(onboarding);
             await dbContext.SaveChangesAsync();
 
-
+            var theme = new Theme
+            {
+                CreateDate = DateTime.Now,
+                IsActive = true,
+                IsDeleted = false,
+                ModifiedDate = DateTime.Now,
+                Name = "Erkek Theme",
+                Gender = GenderEnum.MALE,
+                ColorOne = "#000000",
+                ColorTwo = "#111111",
+                ColorThree = "#222222",
+            };
+            await dbContext.Themes.AddAsync(theme);
+            await dbContext.SaveChangesAsync();
 
         }
     }

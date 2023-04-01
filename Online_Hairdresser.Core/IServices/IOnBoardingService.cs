@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Online_Hairdresser.Core.IServices.AdminPanel
+namespace Online_Hairdresser.Core.IServices
 {
     public interface IOnBoardingService : IRepository<Onboarding>
     {

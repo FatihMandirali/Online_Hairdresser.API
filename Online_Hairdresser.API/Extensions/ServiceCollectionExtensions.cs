@@ -9,10 +9,10 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Online_Hairdresser.Core.Helpers.JWT;
 using Online_Hairdresser.Core.IServices;
-using Online_Hairdresser.Core.IServices.AdminPanel;
+using Online_Hairdresser.Core.IServices;
 using Online_Hairdresser.Core.Mapping;
 using Online_Hairdresser.Core.Services;
-using Online_Hairdresser.Core.Services.AdminPanel;
+using Online_Hairdresser.Core.Services;
 using Online_Hairdresser.Data;
 using Online_Hairdresser.Models.Enums;
 using Online_Hairdresser.Models.Models.Options;
@@ -89,10 +89,10 @@ namespace Online_Hairdresser.API.Extensions
                         { new RouteDataRequestCultureProvider { IndexOfCulture = 1, IndexofUICulture = 1 } };
                 });
 
-            services.Configure<RouteOptions>(options =>
-            {
-                options.ConstraintMap.Add("culture", typeof(LanguageRouteConstraint));
-            });
+            //services.Configure<RouteOptions>(options =>
+           // {
+           //     options.ConstraintMap.Add("culture", typeof(LanguageRouteConstraint));
+           // });
 
             #endregion
 
@@ -193,6 +193,8 @@ namespace Online_Hairdresser.API.Extensions
             services.AddScoped<ITokenHelper, JwtHelper>();
             services.AddScoped<IResponseCacheService, ResponseCacheService>();
             services.AddScoped<IRedisCacheService, RedisCacheService>();
+            services.AddScoped<IThemeService, ThemeService>();
+            services.AddScoped<IUserService, UserService>();
 
             #endregion
 

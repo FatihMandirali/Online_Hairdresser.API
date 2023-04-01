@@ -126,4 +126,7 @@
   <data name="password_invalid" xml:space="preserve">
     <value>Şifre doğrulanamadı</value>
   </data>
+  <data name="login_error" xml:space="preserve">
+    <value>Email veya şifre yanlış</value>
+  </data>
 </root>
