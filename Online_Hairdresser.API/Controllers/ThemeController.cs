@@ -1,8 +1,7 @@
-using FM.Project.BaseLibrary.BaseResponseModel;
 using Microsoft.AspNetCore.Mvc;
-using Online_Hairdresser.Core.Attributes;
 using Online_Hairdresser.Core.IServices;
-using Online_Hairdresser.Models.Models.Response.Onboarding;
+using Online_Hairdresser.Models.Enums;
+using Online_Hairdresser.Models.Models.BaseModel;
 using Online_Hairdresser.Models.Models.Response.Theme;
 
 namespace Online_Hairdresser.API.Controllers;
@@ -21,12 +20,12 @@ public class ThemeController: BaseController
     }
     
     [HttpGet("List")]
-    [Cached]
-    public async Task<FMBaseResponse<List<ThemeResponse>>> GetOnboardingList()
+    //[Cached]
+    public async Task<BaseResponse<List<ThemeResponse>>> GetOnboardingList()
     {
         _logger.LogInformation("onboarding servicess");
         _logger.LogError("onboarding servicess errrorrr");
         var response = await _themeService.GetThemeList();
-        return new FMBaseResponse<List<ThemeResponse>>(FMProcessStatusEnum.Success, null, response);
+        return new BaseResponse<List<ThemeResponse>>(ProcessStatusEnum.Success, null, response);
     }
 }

@@ -1,6 +1,4 @@
-﻿using FM.Project.BaseLibrary.BaseResponseModel;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Online_Hairdresser.API.Localize;
 using Online_Hairdresser.Core.IServices;
@@ -30,14 +28,11 @@ namespace Online_Hairdresser.API.Controllers
         /// <param name="postLogin"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<FMBaseResponse<object>> PostLogin([FromBody] LoginRequest postLogin)
+        public async Task<BaseResponse<object>> PostLogin([FromBody] LoginRequest postLogin)
         {
             _logger.LogError("login hata");
             var response = await _loginService.Login(postLogin);
-            if(response.Item1 is null)
-                return new FMBaseResponse<object>(FMProcessStatusEnum.InternalServerError, new FMFriendlyMessage("",_localizer[response.Item2]), null);
-
-            return new FMBaseResponse<object>(FMProcessStatusEnum.Success, null, response.Item1);
+            return new BaseResponse<object>(ProcessStatusEnum.Success, null, response.Item1);
         }
 
     }

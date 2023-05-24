@@ -4,5 +4,5 @@ namespace Online_Hairdresser.Core.IServices;
 
 public interface IRegisterService
 {
-    Task<string> RegisterUser(UserRegisterRequest registerRequest);
+    Task RegisterUser(UserRegisterRequest registerRequest);
 }

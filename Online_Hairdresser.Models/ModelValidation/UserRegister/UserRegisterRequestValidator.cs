@@ -7,12 +7,20 @@ public class UserRegisterRequestValidator: AbstractValidator<UserRegisterRequest
 {
     public UserRegisterRequestValidator()
     {
-        RuleFor(x => x.Email).EmailAddress().NotNull().WithMessage("Lütfen email alanını uygun doldurun");
-        RuleFor(x => x.Name).NotNull().WithMessage("Lütfen ad alanını uygun doldurun");
-        RuleFor(x => x.Surname).NotNull().WithMessage("Lütfen ad alanını uygun doldurun");
-        RuleFor(x => x.City).NotNull().WithMessage("Lütfen şehir alanını uygun doldurun");
-        RuleFor(x => x.County).NotNull().WithMessage("Lütfen ilçe alanını uygun doldurun");
-        RuleFor(x => x.Password).NotNull().WithMessage("Lütfen şifre alanını uygun doldurun");
-        RuleFor(x => x.Version).NotNull().WithMessage("Lütfen version alanını uygun doldurun");
+        RuleFor(x => x.Email)
+            .EmailAddress().WithMessage("bad_request")
+            .NotNull().WithMessage("bad_request");
+        RuleFor(x => x.Name)
+            .NotNull().WithMessage("bad_request");
+        RuleFor(x => x.Surname)
+            .NotNull().WithMessage("bad_request");
+        RuleFor(x => x.City)
+            .NotNull().WithMessage("bad_request");
+        RuleFor(x => x.County)
+            .NotNull().WithMessage("bad_request");
+        RuleFor(x => x.Password)
+            .NotNull().WithMessage("bad_request");
+        RuleFor(x => x.Version)
+            .NotNull().WithMessage("bad_request");
     }
 }

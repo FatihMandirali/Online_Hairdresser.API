@@ -26,7 +26,14 @@ namespace Online_Hairdresser.API.Extensions.SeedData
                 Name = "Fatih",
                 Password = BC.HashPassword("123456"),
                 Phone = "5393551932",
-                Surname = "Mandıralı"
+                Surname = "Mandıralı",
+                City = "İstanbul",
+                County = "Küçükçekmece",
+                Latitude = "123.123",
+                Longitude = "123.123",
+                Gender = GenderEnum.MALE,
+                NotificationId = "ddd",
+                Version = "1.1.1",
             };
             await dbContext.Users.AddAsync(user);
             await dbContext.SaveChangesAsync();

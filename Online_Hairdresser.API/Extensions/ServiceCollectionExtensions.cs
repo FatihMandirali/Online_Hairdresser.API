@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using FluentValidation.AspNetCore;
-using FM.Project.BaseLibrary.BaseGenericException;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +18,9 @@ using Online_Hairdresser.Models.Models.Options;
 using StackExchange.Redis;
 using System.Globalization;
 using System.Text;
+using Online_Hairdresser.API.Filter;
+using Online_Hairdresser.API.Middleware;
+using Online_Hairdresser.Models.Exceptions;
 
 namespace Online_Hairdresser.API.Extensions
 {
@@ -45,7 +47,7 @@ namespace Online_Hairdresser.API.Extensions
             var cacheSettings = new CacheSettings();
             configuration.Bind(nameof(CacheSettings), cacheSettings);
             services.AddSingleton(cacheSettings);
-
+            services.AddOptions<AppSettings>().BindConfiguration(nameof(AppSettings));
             #endregion
 
             #region MemoryCache
@@ -56,7 +58,11 @@ namespace Online_Hairdresser.API.Extensions
 
             #region Default
 
-            services.AddControllers(options => { options.Filters.Add(typeof(ValidateModelStateAttribute)); })
+            services.AddControllers(options =>
+                {
+                    options.Filters.Add(new HttpResponseExceptionFilter());
+                    options.Filters.Add(typeof(ValidateModelStateAttribute));
+                })
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Program>());
             services.AddEndpointsApiExplorer();
             services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
@@ -65,7 +71,7 @@ namespace Online_Hairdresser.API.Extensions
 
             #region FluentValidation
 
-            services.AddFluentValidation(conf => { conf.RegisterValidatorsFromAssembly(typeof(RolesEnum).Assembly); });
+            services.AddFluentValidation(conf => { conf.RegisterValidatorsFromAssembly(typeof(ErrorException).Assembly); });
 
             #endregion
 
@@ -196,12 +202,13 @@ namespace Online_Hairdresser.API.Extensions
             services.AddScoped<IThemeService, ThemeService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRegisterService, RegisterService>();
+            services.AddScoped<IPublicService, PublicService>();
 
             #endregion
 
             #region ExceptionService
 
-            services.AddScoped<FMExceptionCatcherMiddleware>();
+            services.AddScoped<ExceptionCatcherMiddleware>();
 
             #endregion
 

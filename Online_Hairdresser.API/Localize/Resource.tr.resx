@@ -132,4 +132,7 @@
   <data name="email_exist" xml:space="preserve">
     <value>Bu email zaten kayıtlı</value>
   </data>
+  <data name="bad_request" xml:space="preserve">
+    <value>Lütfen isteğinizi kontrol edin</value>
+  </data>
 </root>

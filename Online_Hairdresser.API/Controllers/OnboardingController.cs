@@ -1,9 +1,6 @@
-﻿using FM.Project.BaseLibrary.BaseResponseModel;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Online_Hairdresser.API.Localize;
-using Online_Hairdresser.Core.Attributes;
 using Online_Hairdresser.Core.IServices;
 using Online_Hairdresser.Models.Enums;
 using Online_Hairdresser.Models.Models.BaseModel;
@@ -31,13 +28,13 @@ namespace Online_Hairdresser.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("List")]
-        [Cached]
-        public async Task<FMBaseResponse<List<OnboardingResponse>>> GetOnboardingList()
+        //[Cached]
+        public async Task<BaseResponse<List<OnboardingResponse>>> GetOnboardingList()
         {
             _logger.LogInformation("onboarding servicess");
             _logger.LogError("onboarding servicess errrorrr");
             var response = await _onboardingService.OnBoardingList();
-            return new FMBaseResponse<List<OnboardingResponse>>(FMProcessStatusEnum.Success, null, response);
+            return new BaseResponse<List<OnboardingResponse>>(ProcessStatusEnum.Success, null, response);
         }
     }
 }

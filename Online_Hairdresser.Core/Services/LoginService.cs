@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Online_Hairdresser.Models.Exceptions;
 using BC = BCrypt.Net.BCrypt;
 
 namespace Online_Hairdresser.Core.Services
@@ -26,10 +27,10 @@ namespace Online_Hairdresser.Core.Services
         {
             var user = await _userService.FindUserByEmailRole(request.Email,request.Role);
             if (user == null)
-                return (null, "login_error");
+                throw new ErrorException("login_error");
             var isValidPassword = BC.Verify(request.Password,user.Password);
             if(!isValidPassword)
-                                return (null, "login_error");
+                throw new ErrorException("login_error");
 
             var token = _tokenHelper.CreateToken(user.Role, user.Id);
             return (token, String.Empty);

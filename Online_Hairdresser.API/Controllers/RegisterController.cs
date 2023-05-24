@@ -1,11 +1,9 @@
-using FM.Project.BaseLibrary.BaseResponseModel;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Localization;
 using Online_Hairdresser.API.Localize;
 using Online_Hairdresser.Core.IServices;
+using Online_Hairdresser.Models.Models.BaseModel;
 using Online_Hairdresser.Models.Models.Request.UserRegister;
-using Online_Hairdresser.Models.Models.Response.Onboarding;
 
 namespace Online_Hairdresser.API.Controllers;
 
@@ -25,14 +23,9 @@ public class RegisterController:BaseController
     }
     
     [HttpPost("RegisterUser")]
-    public async Task<FMBaseResponse<object>> RegisterUser([FromBody] UserRegisterRequest userRegisterRequest)
+    public async Task<BaseResponse<object>> RegisterUser([FromBody] UserRegisterRequest userRegisterRequest)
     {
-        var response = await _registerService.RegisterUser(userRegisterRequest);
-        if (!string.IsNullOrEmpty(response))
-        {
-            _logger.LogError($"register error {userRegisterRequest.Email}");
-            return new FMBaseResponse<object>(FMProcessStatusEnum.InternalServerError, new FMFriendlyMessage("",_localizer[response]), null);
-        }
-        return new FMBaseResponse<object>(FMProcessStatusEnum.Success, null, null);
+        await _registerService.RegisterUser(userRegisterRequest);
+        return new BaseResponse<object>();
     }
 }

@@ -12,8 +12,13 @@ namespace Online_Hairdresser.Models.ModelValidation.Login
     {
         public LoginRequestValidator()
         {
-            RuleFor(x => x.Email).EmailAddress().NotEmpty().NotNull().WithMessage("Lütfen email alanını uygun doldurun");
-            RuleFor(x => x.Password).NotEmpty().NotNull().WithMessage("Lütfen şifre alanını uygun doldurun");
+            RuleFor(x => x.Email)
+                .EmailAddress().WithMessage("bad_request")
+                .NotEmpty().WithMessage("bad_request")
+                .NotNull().WithMessage("bad_request");
+            RuleFor(x => x.Password)
+                .NotEmpty().WithMessage("bad_request")
+                .NotNull().WithMessage("bad_request");
         }
     }
 }

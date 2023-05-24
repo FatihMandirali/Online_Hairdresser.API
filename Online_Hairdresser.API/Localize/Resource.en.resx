@@ -132,4 +132,7 @@
   <data name="email_exist" xml:space="preserve">
     <value>Email is exists</value>
   </data>
+  <data name="bad_request" xml:space="preserve">
+    <value>Request is worng</value>
+  </data>
 </root>

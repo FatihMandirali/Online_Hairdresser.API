@@ -1,14 +1,12 @@
 using Elastic.Apm.NetCoreAll;
-using FM.Project.BaseLibrary.BaseGenericException;
 using Microsoft.Extensions.Options;
 using Online_Hairdresser.API.Extensions;
 using Online_Hairdresser.API.Extensions.SeedData;
 using Online_Hairdresser.Data;
-using Online_Hairdresser.Models.Models.Options;
 using Serilog;
 using Serilog.Sinks.Elasticsearch;
-using StackExchange.Redis;
-using System.Reflection;
+using Online_Hairdresser.API.Middleware;
+
 // dotnet ef --startup-project ../Online_Hairdresser.API/ migrations add EditTables --context OnlineHairdresserDbContext
 
 var builder = WebApplication.CreateBuilder(args);
@@ -51,7 +49,7 @@ if (app.Environment.IsDevelopment())
 app.UseAllElasticApm(builder.Configuration);
 app.UseCors("corsapp");
 
-app.UseMiddleware<FMExceptionCatcherMiddleware>();
+app.UseMiddleware<ExceptionCatcherMiddleware>();
 
 app.UseAuthentication();
 
