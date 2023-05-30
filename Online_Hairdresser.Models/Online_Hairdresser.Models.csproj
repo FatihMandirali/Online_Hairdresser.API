@@ -15,4 +15,8 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.2.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Response\Login" />
+  </ItemGroup>
+
 </Project>

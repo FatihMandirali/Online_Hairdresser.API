@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
-using Online_Hairdresser.Models.Models.Response.Login;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Online_Hairdresser.Models.Models.Request.Login;
 
 namespace Online_Hairdresser.Models.ModelValidation.Login
 {

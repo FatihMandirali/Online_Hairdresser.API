@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Online_Hairdresser.Models.Enums;
 
-namespace Online_Hairdresser.Models.Models.Response.Login
+namespace Online_Hairdresser.Models.Models.Request.Login
 {
     public class LoginRequest
     {

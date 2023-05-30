@@ -21,6 +21,6 @@ public class PublicController:BaseController
     public async Task<BaseResponse<object>> RegisterUser([FromBody] CheckUpdateRequest checkUpdateRequest)
     {
         _publicService.CheckUpdate(checkUpdateRequest);
-        return new BaseResponse<object>();//
+        return new BaseResponse<object>();
     }
 }

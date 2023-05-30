@@ -2,13 +2,10 @@ version: '3.4'
 
 services:
   online_hairdresser.api:
-    image: ${DOCKER_REGISTRY-}onlinehairdresserapi
+    image: fthmndrli/onlinehairdresserapi
     ports:
       - 5006:5006
     restart: always
-    build:
-      context: .
-      dockerfile: Online_Hairdresser.API/Dockerfile
     environment:
         ASPNETCORE_APPREQUIREHOST: "*:5006"
         ASPNETCORE_URLS: "http://*:5006"
@@ -89,9 +86,16 @@ services:
     #command: redis-server --save 20 1 --loglevel warning --requirepass eYVX7EwVmmxKPCDmwMtyKVge8oLd2t81
     volumes: 
       - cache:/data
+  mongodb:
+    image: mongo:6-jammy
+    ports:
+      - '27017:27017'
+    volumes:
+      - dbdata6:/data/db
 
 volumes:
     postgres:
     pgadmin:
     esdata:
     cache:
+    dbdata6:  

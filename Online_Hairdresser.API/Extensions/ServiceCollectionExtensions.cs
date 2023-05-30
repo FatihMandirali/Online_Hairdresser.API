@@ -18,6 +18,7 @@ using Online_Hairdresser.Models.Models.Options;
 using StackExchange.Redis;
 using System.Globalization;
 using System.Text;
+using MongoDB.Driver;
 using Online_Hairdresser.API.Filter;
 using Online_Hairdresser.API.Middleware;
 using Online_Hairdresser.Models.Exceptions;
@@ -48,6 +49,9 @@ namespace Online_Hairdresser.API.Extensions
             configuration.Bind(nameof(CacheSettings), cacheSettings);
             services.AddSingleton(cacheSettings);
             services.AddOptions<AppSettings>().BindConfiguration(nameof(AppSettings));
+            services.Configure<MongoDBSettings>(
+                configuration.GetSection("MongoDBSettings")
+            );
             #endregion
 
             #region MemoryCache
@@ -203,6 +207,9 @@ namespace Online_Hairdresser.API.Extensions
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<IPublicService, PublicService>();
+            services.AddSingleton<IMongoClient>(s => 
+            new MongoClient(configuration.GetValue<string>("MongoDBSettings:ConnectionString")));
+            services.AddScoped<IRefreshTokenService, RefreshTokenService>();
 
             #endregion
 

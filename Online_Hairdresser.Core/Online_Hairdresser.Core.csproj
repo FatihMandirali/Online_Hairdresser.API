@@ -12,11 +12,13 @@
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.1" />
+    <PackageReference Include="MongoDB.Driver" Version="2.19.2" />
     <PackageReference Include="StackExchange.Redis" Version="2.6.70" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Online_Hairdresser.Models\Online_Hairdresser.Models.csproj" />
+    <ProjectReference Include="..\Online_Hairdresser.MongoData\Online_Hairdresser.MongoData.csproj" />
   </ItemGroup>
 
 </Project>

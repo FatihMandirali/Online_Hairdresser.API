@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Online_Hairdresser.Models",
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{38403ABB-D5D2-48D1-83D6-3722406245EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Online_Hairdresser.MongoData", "Online_Hairdresser.MongoData\Online_Hairdresser.MongoData.csproj", "{CAED4C2F-D7F9-4807-9E7B-EDF96B0E1AD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{38403ABB-D5D2-48D1-83D6-3722406245EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38403ABB-D5D2-48D1-83D6-3722406245EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38403ABB-D5D2-48D1-83D6-3722406245EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAED4C2F-D7F9-4807-9E7B-EDF96B0E1AD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAED4C2F-D7F9-4807-9E7B-EDF96B0E1AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAED4C2F-D7F9-4807-9E7B-EDF96B0E1AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAED4C2F-D7F9-4807-9E7B-EDF96B0E1AD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,6 +55,7 @@ Global
 		{32754025-DB72-4D22-9225-C316582D8C96} = {6D9D4456-400C-41F0-AE0B-20C3D8A070D1}
 		{CC2D1EE2-2389-4543-B8DE-F980BA566B9F} = {6D9D4456-400C-41F0-AE0B-20C3D8A070D1}
 		{12D73044-F8B9-48F6-80C5-48A932C3EB84} = {6D9D4456-400C-41F0-AE0B-20C3D8A070D1}
+		{CAED4C2F-D7F9-4807-9E7B-EDF96B0E1AD7} = {6D9D4456-400C-41F0-AE0B-20C3D8A070D1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E675D1A-7305-419B-B02C-28007EBA710C}

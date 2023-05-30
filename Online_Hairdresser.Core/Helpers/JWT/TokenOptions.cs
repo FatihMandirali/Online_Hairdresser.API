@@ -11,6 +11,7 @@ namespace Online_Hairdresser.Core.Helpers.JWT
         public string? Audience { get; set; }
         public string? Issuer { get; set; }
         public int AccessTokenExpretion { get; set; }
+        public int RefreshTokenExpretion { get; set; }
         public string? Key { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using Online_Hairdresser.API.Localize;
 using Online_Hairdresser.Core.IServices;
 using Online_Hairdresser.Models.Enums;
 using Online_Hairdresser.Models.Models.BaseModel;
-using Online_Hairdresser.Models.Models.Response.Login;
+using Online_Hairdresser.Models.Models.Request.Login;
 
 namespace Online_Hairdresser.API.Controllers
 {
@@ -32,7 +32,13 @@ namespace Online_Hairdresser.API.Controllers
         {
             _logger.LogError("login hata");
             var response = await _loginService.Login(postLogin);
-            return new BaseResponse<object>(ProcessStatusEnum.Success, null, response.Item1);
+            return new BaseResponse<object>(ProcessStatusEnum.Success, null, response);
+        }
+        [HttpPost("RefreshToken")]
+        public async Task<BaseResponse<object>> RefreshToken([FromBody] RefreshTokenRequest refreshToken)
+        {
+            var response = await _loginService.RefreshToken(refreshToken);
+            return new BaseResponse<object>(ProcessStatusEnum.Success, null, response);
         }
 
     }
