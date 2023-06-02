@@ -18,7 +18,7 @@ public class PublicController:BaseController
     }
 
     [HttpPost("CheckUpdate")]
-    public async Task<BaseResponse<object>> RegisterUser([FromBody] CheckUpdateRequest checkUpdateRequest)
+    public BaseResponse<object> RegisterUser([FromBody] CheckUpdateRequest checkUpdateRequest)
     {
         _publicService.CheckUpdate(checkUpdateRequest);
         return new BaseResponse<object>();

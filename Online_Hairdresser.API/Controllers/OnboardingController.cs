@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Online_Hairdresser.API.Localize;
+using Online_Hairdresser.Core.Attributes;
 using Online_Hairdresser.Core.IServices;
 using Online_Hairdresser.Models.Enums;
 using Online_Hairdresser.Models.Models.BaseModel;
@@ -28,7 +29,7 @@ namespace Online_Hairdresser.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("List")]
-        //[Cached]
+        [Cached]
         public async Task<BaseResponse<List<OnboardingResponse>>> GetOnboardingList()
         {
             _logger.LogInformation("onboarding servicess");
