@@ -2,19 +2,18 @@ version: '3.4'
 
 services:
   online_hairdresser.api:
-    image: ${DOCKER_REGISTRY-}onlinehairdresserapi
+    image: fthmndrli/onlinehairdresserapi
     ports:
       - 5006:5006
     restart: always
-    build:
-      context: .
-      dockerfile: Online_Hairdresser.API/Dockerfile
     environment:
         ASPNETCORE_APPREQUIREHOST: "*:5006"
         ASPNETCORE_URLS: "http://*:5006"
         TZ: Turkey
         ConnectionStrings__SqlConnection: 
             Host=postgres;Database=postgres;Username=postgres;Password=postgres
+        ConnectionStrings__Redis:
+            cache:6379,abortConnect=false
         MongoDBSettings__ConnectionString:
             mongodb://mongodb:27017
     depends_on:

@@ -12,9 +12,9 @@ public class UserService:Repository<User>,IUserService
     {
     }
 
-    public async Task<User> FindUserByEmailRole(string email, RolesEnum role)
+    public async Task<User> FindUserByEmailRole(string email)
     {
-        var user = await FindAsync(x => x.IsActive && x.Email == email && x.Role == role);
+        var user = await FindAsync(x => x.IsActive && x.Email == email);
         return user;
     }
 }

@@ -22,7 +22,7 @@ namespace Online_Hairdresser.Core.Services
 
         public async Task<AccessToken> Login(LoginRequest request)
         {
-            var user = await _userService.FindUserByEmailRole(request.Email,request.Role);
+            var user = await _userService.FindUserByEmailRole(request.Email);
             if (user == null)
                 throw new ErrorException("login_error");
             var isValidPassword = BC.Verify(request.Password,user.Password);
