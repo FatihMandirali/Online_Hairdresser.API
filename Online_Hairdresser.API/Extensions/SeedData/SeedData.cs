@@ -45,13 +45,29 @@ namespace Online_Hairdresser.API.Extensions.SeedData
                 IsActive = true,
                 IsDeleted = false,
                 ModifiedDate = DateTime.Now,
-                Description = "Açıklama",
-                ImageUrl = "ımage urll",
-                Name = "onboardingg",
-                Ordering = 2
+                Description = "Çevrendeki en popüler erkek kuaförleri bir tık uzağında!",
+                ImageUrl = "images/onboarding/men.png",
+                Name = "MALE",
+                Ordering = 1,
+                Gender = GenderEnum.MALE
             };
 
             await dbContext.Onboardings.AddAsync(onboarding);
+            await dbContext.SaveChangesAsync();
+            var onboarding1 = new Onboarding
+            {
+                CreateDate = DateTime.Now,
+                IsActive = true,
+                IsDeleted = false,
+                ModifiedDate = DateTime.Now,
+                Description = "Çevrendeki en popüler bayan kuaförleri bir tık uzağında!",
+                ImageUrl = "images/onboarding/women.png",
+                Name = "WOMEN",
+                Ordering = 2,
+                Gender = GenderEnum.WOMAN
+            };
+
+            await dbContext.Onboardings.AddAsync(onboarding1);
             await dbContext.SaveChangesAsync();
 
             var theme = new Theme

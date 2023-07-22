@@ -11,6 +11,6 @@ namespace Online_Hairdresser.Core.IServices
 {
     public interface IOnBoardingService : IRepository<Onboarding>
     {
-        Task<List<OnboardingResponse>> OnBoardingList();
+        Task<List<OnboardingResponse>> OnBoardingList(string baseUri);
     }
 }

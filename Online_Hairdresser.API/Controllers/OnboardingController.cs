@@ -29,12 +29,13 @@ namespace Online_Hairdresser.API.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("List")]
-        [Cached]
+        //[Cached]
         public async Task<BaseResponse<List<OnboardingResponse>>> GetOnboardingList()
         {
             _logger.LogInformation("onboarding servicess");
             _logger.LogError("onboarding servicess errrorrr");
-            var response = await _onboardingService.OnBoardingList();
+            var baseUri = $"{Request.Scheme}://{Request.Host}/";
+            var response = await _onboardingService.OnBoardingList(baseUri);
             return new BaseResponse<List<OnboardingResponse>>(ProcessStatusEnum.Success, null, response);
         }
     }

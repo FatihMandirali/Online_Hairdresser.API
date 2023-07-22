@@ -24,13 +24,14 @@ namespace Online_Hairdresser.Core.Services
             _themeService = themeService;
         }
 
-        public async Task<List<OnboardingResponse>> OnBoardingList()
+        public async Task<List<OnboardingResponse>> OnBoardingList(string baseuri)
         {
             var themeList = await _themeService.FindBy(x => x.IsActive).AsNoTracking().ToListAsync();
             var onBoarding = await FindBy(x => x.IsActive).AsNoTracking().OrderBy(x => x.Id).ToListAsync();
             var mapOnBoarding = _mapper.Map<List<OnboardingResponse>>(onBoarding);
             foreach (var item in mapOnBoarding)
             {
+                item.ImageUrl = $"{baseuri}{item.ImageUrl}";
                 var theme=themeList.FirstOrDefault(y => y.Gender == item.Gender);
                 item.Theme = _mapper.Map<ThemeResponse>(theme);
             }
