@@ -25,5 +25,6 @@ stages:
          containerRegistry: 'Docker Hub'
          repository: 'fthmndrli/online-hairdresser-api'
          command: 'buildAndPush'
+         arguments: '--platform linux/amd64'
          Dockerfile: '**/Dockerfile'
           
