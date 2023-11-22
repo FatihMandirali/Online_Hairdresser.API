@@ -11,3 +11,9 @@ public class RefreshTokenMongoRequest
     public int UserId { get; set; }
     public DateTime RefreshExpDate { get; set; }
 }
+public class RefreshTokenPostgreRequest
+{
+    public string RefreshToken { get; set; }
+    public int UserId { get; set; }
+    public DateTime RefreshExpDate { get; set; }
+}

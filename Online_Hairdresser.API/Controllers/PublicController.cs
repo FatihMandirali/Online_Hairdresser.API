@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using Online_Hairdresser.Core.IServices;
 using Online_Hairdresser.Models.Models.BaseModel;
 using Online_Hairdresser.Models.Models.Request.Public;
-using Online_Hairdresser.Models.Models.Request.UserRegister;
 
 namespace Online_Hairdresser.API.Controllers;
 

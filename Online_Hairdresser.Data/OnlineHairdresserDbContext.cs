@@ -19,6 +19,7 @@ namespace Online_Hairdresser.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Onboarding> Onboardings { get; set; }
         public DbSet<Theme> Themes { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

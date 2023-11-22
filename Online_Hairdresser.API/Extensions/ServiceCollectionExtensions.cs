@@ -210,6 +210,7 @@ namespace Online_Hairdresser.API.Extensions
             services.AddSingleton<IMongoClient>(s => 
             new MongoClient(configuration.GetValue<string>("MongoDBSettings:ConnectionString")));
             services.AddScoped<IRefreshTokenService, RefreshTokenService>();
+            services.AddScoped<IRefreshTokenPostgreService, RefreshTokenPostgreService>();
 
             #endregion
 

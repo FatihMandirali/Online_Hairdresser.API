@@ -27,7 +27,7 @@ namespace Online_Hairdresser.API.Controllers
         public async Task<BaseResponse<object>> GetOnboardingList()
         {
             await Task.Delay(10000);
-            return new BaseResponse<object>(ProcessStatusEnum.Success, null, null);
+            return new BaseResponse<object>();
         }
     }
 }

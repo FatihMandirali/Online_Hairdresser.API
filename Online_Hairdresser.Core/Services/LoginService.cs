@@ -11,9 +11,9 @@ namespace Online_Hairdresser.Core.Services
     {
         private readonly ITokenHelper _tokenHelper;
         private readonly IUserService _userService;
-        private readonly IRefreshTokenService _refreshTokenService;
+        private readonly IRefreshTokenPostgreService _refreshTokenService;
 
-        public LoginService(ITokenHelper tokenHelper, IUserService userService, IRefreshTokenService refreshTokenService)
+        public LoginService(ITokenHelper tokenHelper, IUserService userService, IRefreshTokenPostgreService refreshTokenService)
         {
             _tokenHelper = tokenHelper;
             _userService = userService;
@@ -30,7 +30,7 @@ namespace Online_Hairdresser.Core.Services
                 throw new ErrorException("login_error");
 
             var token = _tokenHelper.CreateToken(user.Role, user.Id);
-            await _refreshTokenService.Create(new RefreshTokenMongoRequest
+            await _refreshTokenService.Create(new RefreshTokenPostgreRequest
             {
                 RefreshExpDate = token.RefreshExpirationDate,
                 RefreshToken = token.RefreshToken??"",
@@ -55,7 +55,7 @@ namespace Online_Hairdresser.Core.Services
                 throw new ErrorException("not_found");
             
             var token = _tokenHelper.CreateToken(user.Role, user.Id);
-            await _refreshTokenService.Create(new RefreshTokenMongoRequest
+            await _refreshTokenService.Create(new RefreshTokenPostgreRequest
             {
                 RefreshExpDate = token.RefreshExpirationDate,
                 RefreshToken = token.RefreshToken??"",
