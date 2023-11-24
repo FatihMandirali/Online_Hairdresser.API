@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Online_Hairdresser.Core.IServices;
 using Online_Hairdresser.Data;
 using Online_Hairdresser.Data.Entity;
@@ -14,7 +15,9 @@ public class UserService:Repository<User>,IUserService
 
     public async Task<User> FindUserByEmailRole(string email)
     {
-        var user = await FindAsync(x => x.IsActive && x.Email == email);
+        var user = await FindBy(x => x.IsActive && x.Email == email)
+            .AsNoTracking()
+            .FirstOrDefaultAsync();
         return user;
     }
 }

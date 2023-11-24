@@ -16,13 +16,6 @@ public class CityCountyController:BaseController
     {
         _cityCountyService = cityCountyService;
     }
-
-    // [HttpGet("AddCityCounty")]
-    // public async Task<IActionResult> AddCityCounty()
-    // {
-    //     await _cityCountyService.AddCityCounty();
-    //     return Ok();
-    // }
     
     [HttpGet]
     public async Task<BaseResponse<List<CityCountResponse>>> GetCityCountyList()

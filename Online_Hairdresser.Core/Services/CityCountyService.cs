@@ -45,11 +45,11 @@ public class CityCountyService:Repository<CityCounty>,ICityCountyService
             .GroupBy(x=>x.PlateNumber)
             .Select(x=>new CityCountResponse
             {
-                Id = x.Select(x=>x.Id).FirstOrDefault(),
                 CityName = x.Select(x=>x.CityName).FirstOrDefault(),
-                Counties = x.Select(x=>new CountyResponse
+                Counties = x.Select(y=>new CountyResponse
                 {
-                    CountyName = x.CountyName
+                    Id = y.Id,
+                    CountyName = y.CountyName
                 }).ToList()
             })
             .ToListAsync();

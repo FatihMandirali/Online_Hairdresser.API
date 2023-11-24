@@ -25,13 +25,13 @@ namespace Online_Hairdresser.Core.Helpers.JWT
             _tokenoptions = Configuration.GetSection("Jwt").Get<TokenOptions>();
 
         }
-        public AccessToken CreateToken(RolesEnum rolesEnum, int id)
+        public AccessToken CreateToken(RolesEnum rolesEnum, int id, int cityCountyId=0)
         {
             _accessTokenExp = DateTime.Now.AddMinutes(_tokenoptions.AccessTokenExpretion);
             _refreshTokenExp = DateTime.Now.AddMinutes(_tokenoptions.RefreshTokenExpretion);
             var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenoptions.Key);
             var signingCredentials = SigningCreditianalsHelper.CreateSigningCreditianals(securityKey);
-            var jwt = CreateJwtSecurityWebToken(_tokenoptions, signingCredentials, rolesEnum, id);
+            var jwt = CreateJwtSecurityWebToken(_tokenoptions, signingCredentials, rolesEnum, id,cityCountyId);
             var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
             var token = jwtSecurityTokenHandler.WriteToken(jwt);
             var refreshToken = GenerateRefreshToken();
@@ -69,7 +69,7 @@ namespace Online_Hairdresser.Core.Helpers.JWT
             return principal;
 
         }
-        private JwtSecurityToken CreateJwtSecurityWebToken(TokenOptions tokenOptions, SigningCredentials signingCredentials, RolesEnum rolesEnum, int id)
+        private JwtSecurityToken CreateJwtSecurityWebToken(TokenOptions tokenOptions, SigningCredentials signingCredentials, RolesEnum rolesEnum, int id,int cityCountyId=0)
         {
             var jwt = new JwtSecurityToken
             (
@@ -77,16 +77,17 @@ namespace Online_Hairdresser.Core.Helpers.JWT
                 audience: tokenOptions.Audience,
                 expires: _accessTokenExp,
                 notBefore: DateTime.Now,
-                claims: SetClaims(rolesEnum, id),
+                claims: SetClaims(rolesEnum, id,cityCountyId),
                 signingCredentials: signingCredentials
                 );
             return jwt;
         }
-        private IEnumerable<Claim> SetClaims(RolesEnum rolesEnum, int id)
+        private IEnumerable<Claim> SetClaims(RolesEnum rolesEnum, int id,int cityCountyId=0)
         {
             var claims = new List<Claim>();
             claims.Add(new Claim("AccountRole", rolesEnum.ToString()));
             claims.Add(new Claim("Id", id.ToString()));
+            claims.Add(new Claim("CityCountyId", cityCountyId.ToString()));
             claims.Add(new Claim(ClaimTypes.Role, rolesEnum.ToString()));
             return claims;
         }

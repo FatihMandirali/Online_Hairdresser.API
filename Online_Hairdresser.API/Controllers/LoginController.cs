@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Localization;
 using Online_Hairdresser.API.Localize;
+using Online_Hairdresser.Core.Helpers.JWT;
 using Online_Hairdresser.Core.IServices;
 using Online_Hairdresser.Models.Enums;
 using Online_Hairdresser.Models.Models.BaseModel;
@@ -12,15 +13,11 @@ namespace Online_Hairdresser.API.Controllers
     [ApiController]
     public class LoginController : BaseController
     {
-        private readonly IStringLocalizer<Resource> _localizer;
-        private readonly ILogger<LoginController> _logger;
         private readonly ILoginService _loginService;
 
-        public LoginController(IStringLocalizer<Resource> localizer, ILoginService loginService, ILogger<LoginController> logger)
+        public LoginController(ILoginService loginService)
         {
-            _localizer = localizer;
             _loginService = loginService;
-            _logger = logger;
         }
         /// <summary>
         /// Panel Login service
@@ -28,17 +25,16 @@ namespace Online_Hairdresser.API.Controllers
         /// <param name="postLogin"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<BaseResponse<object>> PostLogin([FromBody] LoginRequest postLogin)
+        public async Task<BaseResponse<AccessToken>> PostLogin([FromBody] LoginRequest postLogin)
         {
-            _logger.LogError("login hata");
             var response = await _loginService.Login(postLogin);
-            return new BaseResponse<object>(ProcessStatusEnum.Success, null, response);
+            return new BaseResponse<AccessToken>(ProcessStatusEnum.Success, null, response);
         }
         [HttpPost("RefreshToken")]
-        public async Task<BaseResponse<object>> RefreshToken([FromBody] RefreshTokenRequest refreshToken)
+        public async Task<BaseResponse<AccessToken>> RefreshToken([FromBody] RefreshTokenRequest refreshToken)
         {
             var response = await _loginService.RefreshToken(refreshToken);
-            return new BaseResponse<object>(ProcessStatusEnum.Success, null, response);
+            return new BaseResponse<AccessToken>(ProcessStatusEnum.Success, null, response);
         }
 
     }

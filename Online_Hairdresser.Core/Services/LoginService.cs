@@ -29,7 +29,7 @@ namespace Online_Hairdresser.Core.Services
             if(!isValidPassword)
                 throw new ErrorException("login_error");
 
-            var token = _tokenHelper.CreateToken(user.Role, user.Id);
+            var token = _tokenHelper.CreateToken(user.Role, user.Id,user.CityCountyId);
             await _refreshTokenService.Create(new RefreshTokenPostgreRequest
             {
                 RefreshExpDate = token.RefreshExpirationDate,
@@ -54,7 +54,7 @@ namespace Online_Hairdresser.Core.Services
             if (user is null)
                 throw new ErrorException("not_found");
             
-            var token = _tokenHelper.CreateToken(user.Role, user.Id);
+            var token = _tokenHelper.CreateToken(user.Role, user.Id,user.CityCountyId);
             await _refreshTokenService.Create(new RefreshTokenPostgreRequest
             {
                 RefreshExpDate = token.RefreshExpirationDate,
