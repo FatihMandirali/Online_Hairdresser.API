@@ -14,9 +14,7 @@ public class UserRegisterRequestValidator: AbstractValidator<UserRegisterRequest
             .NotNull().WithMessage("bad_request");
         RuleFor(x => x.Surname)
             .NotNull().WithMessage("bad_request");
-        RuleFor(x => x.City)
-            .NotNull().WithMessage("bad_request");
-        RuleFor(x => x.County)
+        RuleFor(x => x.CityCountyId)
             .NotNull().WithMessage("bad_request");
         RuleFor(x => x.Password)
             .NotNull().WithMessage("bad_request");

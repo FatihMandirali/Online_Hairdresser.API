@@ -7,8 +7,7 @@ public class UserRegisterRequest
     public string Name { get; set; }
     public string Surname { get; set; }
     public GenderEnum Gender { get; set; }
-    public string City { get; set; }
-    public string County { get; set; }
+    public int CityCountyId { get; set; }
     public string Email { get; set; }
     public string Latitude { get; set; }
     public string Longitude { get; set; }

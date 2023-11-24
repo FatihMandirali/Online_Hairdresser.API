@@ -1,8 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Text.Json;
+using Microsoft.EntityFrameworkCore;
 using Online_Hairdresser.Data;
 using Online_Hairdresser.Data.Entity;
 using Online_Hairdresser.Models.Enums;
+using Online_Hairdresser.Models.Models.Request.CityCounty;
 using BC = BCrypt.Net.BCrypt;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace Online_Hairdresser.API.Extensions.SeedData
 {
@@ -16,6 +19,27 @@ namespace Online_Hairdresser.API.Extensions.SeedData
         public static async Task SeedDataCreate(OnlineHairdresserDbContext dbContext)
         {
             if (await dbContext.Users.CountAsync() > 0) return;
+            string path =  $"{Directory.GetCurrentDirectory()}{@"/wwwroot/files/json/city_county.json"}";
+            using FileStream json = File.OpenRead(path);
+            List<CityCountyJson> cityCountyJsons = JsonSerializer.Deserialize<List<CityCountyJson>>(json);
+            List<CityCounty> cityCounties = new();
+            cityCountyJsons.ForEach(x =>
+            {
+                cityCounties.Add(new CityCounty
+                {
+                    PlateNumber = x.plaka,
+                    CityName = x.il,
+                    CountyName = x.ilce,
+                    Region = x.bolge,
+                    CreateDate = DateTime.Now,
+                    ModifiedDate = DateTime.Now,
+                    IsActive = true,
+                    IsDeleted = false
+                });
+            });
+            
+            await dbContext.CityCounties.AddRangeAsync(cityCounties);
+            await dbContext.SaveChangesAsync();
             var user = new User
             {
                 CreateDate = DateTime.Now,
@@ -27,8 +51,7 @@ namespace Online_Hairdresser.API.Extensions.SeedData
                 Password = BC.HashPassword("123456"),
                 Phone = "5393551932",
                 Surname = "Mandıralı",
-                City = "İstanbul",
-                County = "Küçükçekmece",
+                CityCountyId = 1,
                 Latitude = "123.123",
                 Longitude = "123.123",
                 Gender = GenderEnum.MALE,

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Online_Hairdresser.Data;
@@ -11,9 +12,10 @@ using Online_Hairdresser.Data;
 namespace Online_Hairdresser.Data.Migrations
 {
     [DbContext(typeof(OnlineHairdresserDbContext))]
-    partial class OnlineHairdresserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231122201736_CityCountyTableAdd")]
+    partial class CityCountyTableAdd
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -200,8 +202,13 @@ namespace Online_Hairdresser.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CityCountyId")
-                        .HasColumnType("integer");
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("County")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp with time zone");
@@ -262,22 +269,9 @@ namespace Online_Hairdresser.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CityCountyId");
-
                     b.HasIndex("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("Online_Hairdresser.Data.Entity.User", b =>
-                {
-                    b.HasOne("Online_Hairdresser.Data.Entity.CityCounty", "CityCounty")
-                        .WithMany()
-                        .HasForeignKey("CityCountyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CityCounty");
                 });
 #pragma warning restore 612, 618
         }

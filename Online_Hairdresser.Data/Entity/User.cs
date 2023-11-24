@@ -21,7 +21,8 @@ namespace Online_Hairdresser.Data.Entity
         public string Longitude { get; set; }
         public PlatformEnum Platform { get; set; }
         public string Version { get; set; }
-        public string City { get; set; }
-        public string County { get; set; }
+        
+        public int CityCountyId { get; set; }
+        public CityCounty CityCounty { get; set; }
     }
 }

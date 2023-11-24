@@ -3,6 +3,7 @@ using Online_Hairdresser.Data.Entity;
 using Online_Hairdresser.Models.Enums;
 using Online_Hairdresser.Models.Exceptions;
 using Online_Hairdresser.Models.Models.Request.UserRegister;
+using BC = BCrypt.Net.BCrypt;
 
 namespace Online_Hairdresser.Core.Services;
 
@@ -29,12 +30,11 @@ public class RegisterService:IRegisterService
         user.NotificationId = registerRequest.NotificationId;
         user.Latitude = registerRequest.Latitude;
         user.Longitude = registerRequest.Longitude;
-        user.City = registerRequest.City;
-        user.County = registerRequest.County;
+        user.CityCountyId = registerRequest.CityCountyId;
         user.Version = registerRequest.Version;
         user.Platform = registerRequest.Platform;
         user.Phone = registerRequest.Phone;
-        user.Password = registerRequest.Password;
+        user.Password = BC.HashPassword("registerRequest.Password");
         await _userService.AddAsync(user);
     }
 }
