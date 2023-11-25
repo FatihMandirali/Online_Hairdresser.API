@@ -262,6 +262,7 @@ namespace Online_Hairdresser.API.Extensions.SeedData
                 Gender = GenderEnum.MALE,
                 NotificationId = "ddd",
                 Version = "1.1.1",
+                Role = RolesEnum.User
             };
             await dbContext.Users.AddAsync(user);
             await dbContext.SaveChangesAsync();

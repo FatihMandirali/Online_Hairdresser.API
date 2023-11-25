@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Online_Hairdresser.Core.IServices;
 using Online_Hairdresser.Models.Enums;
@@ -8,6 +9,7 @@ namespace Online_Hairdresser.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
+[Authorize(Roles = "User")]
 public class VenueServiceController:BaseController
 {
    private readonly IVenueServicesService _venueServicesService;
