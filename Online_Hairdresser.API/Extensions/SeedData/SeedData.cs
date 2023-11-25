@@ -63,13 +63,37 @@ namespace Online_Hairdresser.API.Extensions.SeedData
             await dbContext.Venues.AddAsync(venue);
             await dbContext.SaveChangesAsync();
             
-            var venueService = new VenueService
+            var service = new Service
             {
                 CreateDate = DateTime.Now,
                 IsActive = true,
                 IsDeleted = false,
                 ModifiedDate = DateTime.Now,
                 Name = "Saç Kesimi",
+                Image = "images/service/sac.png"
+            };
+            await dbContext.Services.AddAsync(service);
+            await dbContext.SaveChangesAsync();
+            
+            var service1 = new Service
+            {
+                CreateDate = DateTime.Now,
+                IsActive = true,
+                IsDeleted = false,
+                ModifiedDate = DateTime.Now,
+                Name = "Sakal Kesimi",
+                Image = "images/service/sakal.png"
+            };
+            await dbContext.Services.AddAsync(service1);
+            await dbContext.SaveChangesAsync();
+            
+            var venueService = new VenueService
+            {
+                CreateDate = DateTime.Now,
+                IsActive = true,
+                IsDeleted = false,
+                ModifiedDate = DateTime.Now,
+                ServiceId = service.Id,
                 Price = 50,
                 VenueId = venue.Id
             };
@@ -82,7 +106,7 @@ namespace Online_Hairdresser.API.Extensions.SeedData
                 IsActive = true,
                 IsDeleted = false,
                 ModifiedDate = DateTime.Now,
-                Name = "Sakal Kesimi",
+                ServiceId = service1.Id,
                 Price = 30,
                 VenueId = venue.Id
             };

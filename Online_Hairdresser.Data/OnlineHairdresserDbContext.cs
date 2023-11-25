@@ -27,6 +27,8 @@ namespace Online_Hairdresser.Data
         public DbSet<VenueWorker> VenueWorkers{ get; set; }
         public DbSet<VenueAppointment> VenueAppointments{ get; set; }
         public DbSet<VenueWorkingHour> VenueWorkingHours{ get; set; }
+        public DbSet<UserFavoriteVenue> UserFavoriteVenues{ get; set; }
+        public DbSet<Service> Services{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -38,6 +40,8 @@ namespace Online_Hairdresser.Data
             modelBuilder.Entity<VenueWorker>().HasQueryFilter(u => !u.IsDeleted && u.IsActive);
             modelBuilder.Entity<VenueAppointment>().HasQueryFilter(u => !u.IsDeleted && u.IsActive);
             modelBuilder.Entity<VenueWorkingHour>().HasQueryFilter(u => !u.IsDeleted && u.IsActive);
+            modelBuilder.Entity<UserFavoriteVenue>().HasQueryFilter(u => !u.IsDeleted && u.IsActive);
+            modelBuilder.Entity<Service>().HasQueryFilter(u => !u.IsDeleted && u.IsActive);
             base.OnModelCreating(modelBuilder);
         }
     }

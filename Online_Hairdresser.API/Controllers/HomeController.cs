@@ -16,9 +16,11 @@ namespace Online_Hairdresser.API.Controllers
     public class HomeController : BaseController
     {
         private readonly IVenueService _venueService;
-        public HomeController(IVenueService venueService)
+        private readonly IUserFavoriteVenueService _userFavoriteVenueService;
+        public HomeController(IVenueService venueService, IUserFavoriteVenueService userFavoriteVenueService)
         {
             _venueService = venueService;
+            _userFavoriteVenueService = userFavoriteVenueService;
         }
 
         /// <summary>
@@ -32,5 +34,33 @@ namespace Online_Hairdresser.API.Controllers
             var response = await _venueService.GetVenueList(request,baseUri);
             return new BaseResponse<PaginatedList<VenueResponse>>(ProcessStatusEnum.Success, null, response);
         }
+        
+        [HttpPost("CreateUserFavoriteVenue")]
+        public async Task<BaseResponse<object>> CreateUserFavoriteVenue([FromBody] UserFavoriteVenueRequest request)
+        {
+            var userId = CurrentUserId;
+            await _userFavoriteVenueService.CreateUserFavoriteVenue(request,userId);
+            return new BaseResponse<object>();
+        }
+        
+        [HttpDelete("DeleteUserFavoriteVenue")]
+        public async Task<BaseResponse<object>> DeleteUserFavoriteVenue([FromBody] UserFavoriteVenueRequest request)
+        {
+            var userId = CurrentUserId;
+            await _userFavoriteVenueService.DeleteUserFavoriteVenue(request,userId);
+            return new BaseResponse<object>();
+        }
+        
+        [HttpGet("GetUserFavoriteVenueList")]
+        public async Task<BaseResponse<List<int>>> GetUserFavoriteVenueList()
+        {
+            var userId = CurrentUserId;
+            var response = await _userFavoriteVenueService.GetUserFavoriteVenue(userId);
+            return new BaseResponse<List<int>>(ProcessStatusEnum.Success, null, response);
+        }
+        
+        //todo: servisleri ayrı genel tablodan yönet
+        //todo: controllerları ayır
+        
     }
 }

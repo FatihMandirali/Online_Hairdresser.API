@@ -135,4 +135,7 @@
   <data name="bad_request" xml:space="preserve">
     <value>Request is worng</value>
   </data>
+  <data name="already_favorite" xml:space="preserve">
+    <value>Already Favorite</value>
+  </data>
 </root>

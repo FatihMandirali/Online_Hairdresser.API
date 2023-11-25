@@ -4,6 +4,8 @@ public class VenueService:AuditableEntity
 {
     public int VenueId { get; set; }
     public Venue Venue { get; set; }
-    public string Name { get; set; } //todo example: saç, sakal 
+    public int ServiceId { get; set; }
+    public Service Service { get; set; }
+    
     public decimal Price { get; set; }
 }
