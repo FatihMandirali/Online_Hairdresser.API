@@ -6,4 +6,5 @@ public class AppSettings
     public Version IosMinorVersion { get; set; }
     public Version AndroidMajorVersion { get; set; }
     public Version AndroidMinorVersion { get; set; }
+    public int PageRowLimit { get; set; }
 }

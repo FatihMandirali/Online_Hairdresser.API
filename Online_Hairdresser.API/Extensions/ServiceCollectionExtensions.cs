@@ -212,6 +212,7 @@ namespace Online_Hairdresser.API.Extensions
             services.AddScoped<IRefreshTokenService, RefreshTokenService>();
             services.AddScoped<IRefreshTokenPostgreService, RefreshTokenPostgreService>();
             services.AddScoped<ICityCountyService, CityCountyService>();
+            services.AddScoped<IVenueService, VenueService>();
 
             #endregion
 

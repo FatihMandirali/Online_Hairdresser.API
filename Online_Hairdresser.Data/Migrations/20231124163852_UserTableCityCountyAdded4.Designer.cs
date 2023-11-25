@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Online_Hairdresser.Data;
@@ -11,9 +12,10 @@ using Online_Hairdresser.Data;
 namespace Online_Hairdresser.Data.Migrations
 {
     [DbContext(typeof(OnlineHairdresserDbContext))]
-    partial class OnlineHairdresserDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231124163852_UserTableCityCountyAdded4")]
+    partial class UserTableCityCountyAdded4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -297,15 +299,11 @@ namespace Online_Hairdresser.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<double>("Latitude")
+                    b.Property<double>("Latitute")
                         .HasColumnType("double precision");
 
-                    b.Property<double>("Longitude")
+                    b.Property<double>("Longitute")
                         .HasColumnType("double precision");
-
-                    b.Property<string>("MainImage")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("timestamp with time zone");

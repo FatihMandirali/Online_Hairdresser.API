@@ -5,7 +5,9 @@ using Online_Hairdresser.Core.Attributes;
 using Online_Hairdresser.Core.IServices;
 using Online_Hairdresser.Models.Enums;
 using Online_Hairdresser.Models.Models.BaseModel;
+using Online_Hairdresser.Models.Models.Request.Venue;
 using Online_Hairdresser.Models.Models.Response.Onboarding;
+using Online_Hairdresser.Models.Models.Response.Venue;
 
 namespace Online_Hairdresser.API.Controllers
 {
@@ -13,21 +15,21 @@ namespace Online_Hairdresser.API.Controllers
     [ApiController]
     public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IVenueService _venueService;
+        public HomeController(IVenueService venueService)
         {
-            _logger = logger;
+            _venueService = venueService;
         }
 
         /// <summary>
         /// Home Service...
         /// </summary>
         /// <returns></returns>
-        [HttpGet("List")]
-        public async Task<BaseResponse<object>> GetOnboardingList()
+        [HttpGet("GetVenueList")]
+        public async Task<BaseResponse<PaginatedList<VenueResponse>>> GetVenueList([FromQuery] VenueListRequest request)
         {
-            await Task.Delay(10000);
-            return new BaseResponse<object>();
+            var response = await _venueService.GetVenueList(request);
+            return new BaseResponse<PaginatedList<VenueResponse>>(ProcessStatusEnum.Success, null, response);
         }
     }
 }

@@ -14,14 +14,10 @@ namespace Online_Hairdresser.API.Controllers
     public class OnboardingController : BaseController
     {
         private readonly IOnBoardingService _onboardingService;
-        private readonly IStringLocalizer<Resource> _localizer;
-        private readonly ILogger<OnboardingController> _logger;
 
-        public OnboardingController(IOnBoardingService onboardingService, IStringLocalizer<Resource> localizer, ILogger<OnboardingController> logger)
+        public OnboardingController(IOnBoardingService onboardingService)
         {
             _onboardingService = onboardingService;
-            _localizer = localizer;
-            _logger = logger;
         }
 
         /// <summary>
@@ -32,8 +28,6 @@ namespace Online_Hairdresser.API.Controllers
         //[Cached]
         public async Task<BaseResponse<List<OnboardingResponse>>> GetOnboardingList()
         {
-            _logger.LogInformation("onboarding servicess");
-            _logger.LogError("onboarding servicess errrorrr");
             var baseUri = $"{Request.Scheme}://{Request.Host}/";
             var response = await _onboardingService.OnBoardingList(baseUri);
             return new BaseResponse<List<OnboardingResponse>>(ProcessStatusEnum.Success, null, response);
