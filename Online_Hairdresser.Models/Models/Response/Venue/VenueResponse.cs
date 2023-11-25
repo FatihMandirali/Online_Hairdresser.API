@@ -10,4 +10,5 @@ public class VenueResponse
     public double Longitute { get; set; }
     public double Latitute { get; set; }
     public double Distance { get; set; }
+    public double Star { get; set; }
 }

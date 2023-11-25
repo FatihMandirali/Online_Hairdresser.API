@@ -8,5 +8,5 @@ namespace Online_Hairdresser.Core.IServices;
 
 public interface IVenueService:IRepository<Venue>
 {
-    Task<PaginatedList<VenueResponse>> GetVenueList(VenueListRequest request);
+    Task<PaginatedList<VenueResponse>> GetVenueList(VenueListRequest request,string baseUri);
 }

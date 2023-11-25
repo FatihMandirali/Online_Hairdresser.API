@@ -58,6 +58,7 @@ namespace Online_Hairdresser.API.Extensions.SeedData
                 Info = "FM Kuaför Hizmetinizde",
                 Motto = "Bay&Bayan Kuaför",
                 ProcessInterval = 30,
+                MainImage = "images/venue/hairdresser.png"
             };
             await dbContext.Venues.AddAsync(venue);
             await dbContext.SaveChangesAsync();

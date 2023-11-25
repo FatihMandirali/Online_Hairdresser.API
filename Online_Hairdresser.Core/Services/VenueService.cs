@@ -21,9 +21,11 @@ public class VenueService : Repository<Venue>, IVenueService
         _appSettings = appSettings.Value;
     }
 
-    public async Task<PaginatedList<VenueResponse>> GetVenueList(VenueListRequest request)
+    //https://latlongdata.com/distance-calculator/
+    //https://www.latlong.net/category/cities-228-15.html
+    public async Task<PaginatedList<VenueResponse>> GetVenueList(VenueListRequest request, string baseUri)
     {
-        var query = FindBy(x=>x.Name != null)
+        var query = FindBy(x => x.Name != null)
             .AsNoTracking();
         if (request.Search is not null)
             query = query.Where(x => EF.Functions.Like(x.Name, $"%{request.Search}%")
@@ -36,44 +38,50 @@ public class VenueService : Repository<Venue>, IVenueService
 
         if (request.Latitute == 0 && request.Longitute == 0)
         {
-            var queryResponse = query.Select(l=>new VenueResponse
-            {
-                Id = l.Id,
-                Info = l.Info,
-                Latitute = l.Latitude,
-                Longitute = l.Longitude,
-                Motto = l.Motto,
-                Name = l.Name,
-                Distance = 0,
-                Image = l.MainImage
-            });
-            
-            return await PaginatedList<VenueResponse>.CreateAsync(queryResponse, request.Page, _appSettings.PageRowLimit);
+            var queryResponse = query.Select(l => new VenueResponse
+                {
+                    Id = l.Id,
+                    Info = l.Info,
+                    Latitute = l.Latitude,
+                    Longitute = l.Longitude,
+                    Motto = l.Motto,
+                    Name = l.Name,
+                    Distance = 0,
+                    Image = $"{baseUri}{l.MainImage}",
+                    Star = l.Star
+                })
+                .OrderByDescending(x => x.Star);
+
+            return await PaginatedList<VenueResponse>.CreateAsync(queryResponse, request.Page,
+                _appSettings.PageRowLimit);
         }
+
         var queryDistance = (from l in query
-            let rlat1 = Math.PI * l.Latitude / 180
-            let rlat2 = Math.PI * request.Latitute / 180
-            let theta = request.Longitute - l.Longitude
-            let rtheta = Math.PI * theta / 180
-            let dist = Math.Sin(rlat1) * Math.Sin(rlat2) + Math.Cos(rlat1) * Math.Cos(rlat2) * Math.Cos(rtheta)
-            let dist2 = Math.Acos(dist)
-            let dist3 = dist2 * 180 / Math.PI
-            let dist4 = dist3 * 60 * 1.1515
-            let dist5 = dist4 * 1.609344
-            where (l.Latitude > 0 && l.Longitude > 0)
-            orderby dist5
-            select new VenueResponse
-            {
-                Id = l.Id,
-                Info = l.Info,
-                Latitute = l.Latitude,
-                Longitute = l.Longitude,
-                Motto = l.Motto,
-                Name = l.Name,
-                Distance = dist5,
-                Image = l.MainImage
-            });
-            
+                let rlat1 = Math.PI * l.Latitude / 180
+                let rlat2 = Math.PI * request.Latitute / 180
+                let theta = request.Longitute - l.Longitude
+                let rtheta = Math.PI * theta / 180
+                let dist = Math.Sin(rlat1) * Math.Sin(rlat2) + Math.Cos(rlat1) * Math.Cos(rlat2) * Math.Cos(rtheta)
+                let dist2 = Math.Acos(dist)
+                let dist3 = dist2 * 180 / Math.PI
+                let dist4 = dist3 * 60 * 1.1515
+                let dist5 = dist4 * 1.609344
+                where (l.Latitude > 0 && l.Longitude > 0)
+                orderby dist5
+                select new VenueResponse
+                {
+                    Id = l.Id,
+                    Info = l.Info,
+                    Latitute = l.Latitude,
+                    Longitute = l.Longitude,
+                    Motto = l.Motto,
+                    Name = l.Name,
+                    Distance = dist5,
+                    Image = $"{baseUri}{l.MainImage}",
+                    Star = l.Star
+                })
+            .OrderByDescending(x => x.Star);
+
         return await PaginatedList<VenueResponse>.CreateAsync(queryDistance, request.Page, _appSettings.PageRowLimit);
     }
 }
