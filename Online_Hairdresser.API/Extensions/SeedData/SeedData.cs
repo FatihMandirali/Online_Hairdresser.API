@@ -58,7 +58,8 @@ namespace Online_Hairdresser.API.Extensions.SeedData
                 Info = "FM Kuaför Hizmetinizde",
                 Motto = "Bay&Bayan Kuaför",
                 ProcessInterval = 30,
-                MainImage = "images/venue/hairdresser.png"
+                MainImage = "images/venue/hairdresser.png",
+                VenueType = VenueTypeEnum.MAN
             };
             await dbContext.Venues.AddAsync(venue);
             await dbContext.SaveChangesAsync();
@@ -70,7 +71,8 @@ namespace Online_Hairdresser.API.Extensions.SeedData
                 IsDeleted = false,
                 ModifiedDate = DateTime.Now,
                 Name = "Saç Kesimi",
-                Image = "images/service/sac.png"
+                Image = "images/service/sac.png",
+                VenueType = VenueTypeEnum.MAN
             };
             await dbContext.Services.AddAsync(service);
             await dbContext.SaveChangesAsync();
@@ -82,7 +84,8 @@ namespace Online_Hairdresser.API.Extensions.SeedData
                 IsDeleted = false,
                 ModifiedDate = DateTime.Now,
                 Name = "Sakal Kesimi",
-                Image = "images/service/sakal.png"
+                Image = "images/service/sakal.png",
+                VenueType = VenueTypeEnum.MAN
             };
             await dbContext.Services.AddAsync(service1);
             await dbContext.SaveChangesAsync();

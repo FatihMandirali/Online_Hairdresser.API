@@ -1,3 +1,5 @@
+using Online_Hairdresser.Models.Enums;
+
 namespace Online_Hairdresser.Models.Models.Response.Venue;
 
 public class VenueResponse
@@ -11,4 +13,5 @@ public class VenueResponse
     public double Latitute { get; set; }
     public double Distance { get; set; }
     public double Star { get; set; }
+    public VenueTypeEnum VenueType { get; set; }
 }

@@ -25,7 +25,7 @@ public class VenueService : Repository<Venue>, IVenueService
     //https://www.latlong.net/category/cities-228-15.html
     public async Task<PaginatedList<VenueResponse>> GetVenueList(VenueListRequest request, string baseUri)
     {
-        var query = FindBy(x => x.Name != null)
+        var query = FindBy(x => x.VenueType == request.VenueType)
             .AsNoTracking();
         if (request.Search is not null)
             query = query.Where(x => EF.Functions.Like(x.Name, $"%{request.Search}%")
@@ -48,7 +48,8 @@ public class VenueService : Repository<Venue>, IVenueService
                     Name = l.Name,
                     Distance = 0,
                     Image = $"{baseUri}{l.MainImage}",
-                    Star = l.Star
+                    Star = l.Star,
+                    VenueType = l.VenueType
                 })
                 .OrderByDescending(x => x.Star);
 
@@ -78,7 +79,8 @@ public class VenueService : Repository<Venue>, IVenueService
                     Name = l.Name,
                     Distance = dist5,
                     Image = $"{baseUri}{l.MainImage}",
-                    Star = l.Star
+                    Star = l.Star,
+                    VenueType = l.VenueType
                 })
             .OrderByDescending(x => x.Star);
 
