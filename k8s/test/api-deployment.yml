@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hairdresserapi
+  namespace: test
+spec:
+  selector:
+   matchLabels:
+    app: hairdresserapi
+  replicas: 1
+  template:
+    metadata:
+      namespace: test
+      labels:
+        app: hairdresserapi  
+    spec:
+      containers:
+        - name: hairdresserapi
+          image: fthmndrli/newhairdresser
+          imagePullPolicy: "IfNotPresent"
+          env:
+           - name: ASPNETCORE_APPREQUIREHOST
+             value: "*:5006"
+           - name: ASPNETCORE_URLS
+             value: "http://*:5006"
+           - name: TZ
+             value: "Turkey"
+           - name: ConnectionStrings__SqlConnection
+             value: Host=postgres;Database=mydb;Username=postgres;Password=61241210
+          ports:
+            - containerPort: 5006   

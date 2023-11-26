@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: test
+spec:
+  selector:
+   matchLabels:
+    app: postgres
+  replicas: 1
+  template:
+    metadata:
+      namespace: test
+      labels:
+        app: postgres  
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:latest
+          imagePullPolicy: "IfNotPresent"
+          env:
+           - name: POSTGRES_USER
+             value: postgres
+           - name: POSTGRES_PASSWORD
+             value: "61241210"
+             
