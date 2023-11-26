@@ -22,7 +22,7 @@ stages:
     steps:
       - task: Docker@2
         inputs:
-         containerRegistry: 'Docker Hub'
+         containerRegistry: 'DockerHub'
          repository: 'fthmndrli/online-hairdresser-api-v2'
          command: 'buildAndPush'
          arguments: '--platform linux/amd64'
