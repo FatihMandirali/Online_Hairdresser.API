@@ -11,5 +11,6 @@ namespace Online_Hairdresser.Models.Enums
         Admin = 0,
         Hairdresser = 1,
         User = 2,
+        General=3
     }
 }

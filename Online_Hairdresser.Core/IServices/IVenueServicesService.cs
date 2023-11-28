@@ -6,5 +6,5 @@ namespace Online_Hairdresser.Core.IServices;
 
 public interface IVenueServicesService:IRepository<VenueService>
 {
-    Task<List<VenueServiceResponse>> VenueServiceList(int venueId, string baseUri);
+    Task<List<VenueServiceResponse>> VenueServiceList(int? venueId, string baseUri);
 }

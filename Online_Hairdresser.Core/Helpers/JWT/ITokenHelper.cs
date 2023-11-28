@@ -12,5 +12,6 @@ namespace Online_Hairdresser.Core.Helpers.JWT
     {
         AccessToken CreateToken(RolesEnum rolesEnum, int id, int cityCountyId = 0);
         ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token);
+        AccessToken GeneralCreateToken();
     }
 }

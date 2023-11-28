@@ -10,7 +10,7 @@ namespace Online_Hairdresser.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize(Roles = "User")]
+[Authorize(Roles = "User,General")]
 public class VenueController:BaseController
 {
     private readonly IVenueService _venueService;

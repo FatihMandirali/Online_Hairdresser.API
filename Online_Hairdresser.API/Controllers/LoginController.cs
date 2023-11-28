@@ -30,10 +30,30 @@ namespace Online_Hairdresser.API.Controllers
             var response = await _loginService.Login(postLogin);
             return new BaseResponse<AccessToken>(ProcessStatusEnum.Success, null, response);
         }
+        
+        /// <summary>
+        /// General Login service
+        /// </summary>
+        /// <param name="postLogin"></param>
+        /// <returns></returns>
+        [HttpPost("GeneralLogin")]
+        public async Task<BaseResponse<AccessToken>> GeneralLogin()
+        {
+            var response = await _loginService.GeneralLogin();
+            return new BaseResponse<AccessToken>(ProcessStatusEnum.Success, null, response);
+        }
+        
         [HttpPost("RefreshToken")]
         public async Task<BaseResponse<AccessToken>> RefreshToken([FromBody] RefreshTokenRequest refreshToken)
         {
             var response = await _loginService.RefreshToken(refreshToken);
+            return new BaseResponse<AccessToken>(ProcessStatusEnum.Success, null, response);
+        }
+        
+        [HttpPost("GeneralRefreshToken")]
+        public async Task<BaseResponse<AccessToken>> GeneralRefreshToken([FromBody] RefreshTokenRequest refreshToken)
+        {
+            var response = await _loginService.GeneralRefreshToken(refreshToken);
             return new BaseResponse<AccessToken>(ProcessStatusEnum.Success, null, response);
         }
 

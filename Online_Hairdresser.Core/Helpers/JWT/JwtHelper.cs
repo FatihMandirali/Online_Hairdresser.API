@@ -45,6 +45,50 @@ namespace Online_Hairdresser.Core.Helpers.JWT
             };
 
         }
+        public AccessToken GeneralCreateToken()
+        {
+            _accessTokenExp = DateTime.Now.AddMinutes(_tokenoptions.AccessTokenExpretion);
+            _refreshTokenExp = DateTime.Now.AddMinutes(_tokenoptions.RefreshTokenExpretion);
+            var securityKey = SecurityKeyHelper.CreateSecurityKey(_tokenoptions.Key);
+            var signingCredentials = SigningCreditianalsHelper.CreateSigningCreditianals(securityKey);
+            var jwt = CreateGeneralJwtSecurityWebToken(_tokenoptions, signingCredentials);
+            var jwtSecurityTokenHandler = new JwtSecurityTokenHandler();
+            var token = jwtSecurityTokenHandler.WriteToken(jwt);
+            var refreshToken = GenerateRefreshToken();
+            
+            return new AccessToken
+            {
+                Token = token,
+                ExpirationDate = _accessTokenExp,
+                RefreshExpirationDate = _refreshTokenExp,
+                RefreshToken = refreshToken
+            };
+
+        }
+        
+        private JwtSecurityToken CreateGeneralJwtSecurityWebToken(TokenOptions tokenOptions,SigningCredentials signingCredentials)
+        {
+            var jwt = new JwtSecurityToken
+            (
+                issuer: tokenOptions.Issuer,
+                audience: tokenOptions.Audience,
+                expires: _accessTokenExp,
+                notBefore: DateTime.Now,
+                claims: SetGeneralClaims(),
+                signingCredentials: signingCredentials
+            );
+            return jwt;
+        }
+        
+        private IEnumerable<Claim> SetGeneralClaims()
+        {
+            var claims = new List<Claim>();
+            claims.Add(new Claim("AccountRole", nameof(RolesEnum.General)));
+            claims.Add(new Claim("CityCountyId", 1.ToString()));
+            claims.Add(new Claim(ClaimTypes.Role, nameof(RolesEnum.General)));
+            return claims;
+        }
+        
         private static string GenerateRefreshToken()
         {
             var randomNumber = new byte[64];

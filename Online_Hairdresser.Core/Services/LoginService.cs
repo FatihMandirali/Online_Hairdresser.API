@@ -38,6 +38,19 @@ namespace Online_Hairdresser.Core.Services
             });
             return token;
         }
+
+        public async Task<AccessToken> GeneralLogin()
+        {
+            var token = _tokenHelper.GeneralCreateToken();
+            await _refreshTokenService.Create(new RefreshTokenPostgreRequest
+            {
+                RefreshExpDate = token.RefreshExpirationDate,
+                RefreshToken = token.RefreshToken??"",
+                UserId = 0
+            });
+            return token;
+        }
+
         public async Task<AccessToken> RefreshToken(RefreshTokenRequest request)
         {
             var principal = _tokenHelper.GetPrincipalFromExpiredToken(request.Token);
@@ -60,6 +73,25 @@ namespace Online_Hairdresser.Core.Services
                 RefreshExpDate = token.RefreshExpirationDate,
                 RefreshToken = token.RefreshToken??"",
                 UserId = user.Id
+            });
+            return token;
+        }
+        public async Task<AccessToken> GeneralRefreshToken(RefreshTokenRequest request)
+        {
+            var principal = _tokenHelper.GetPrincipalFromExpiredToken(request.Token);
+            if (principal == null)
+                throw new ErrorException("bad_request");
+            
+            var refreshToken = await _refreshTokenService.GetAsync(request.RefreshToken);
+            if(refreshToken is null)
+                throw new ErrorException("not_found");
+            
+            var token = _tokenHelper.GeneralCreateToken();
+            await _refreshTokenService.Create(new RefreshTokenPostgreRequest
+            {
+                RefreshExpDate = token.RefreshExpirationDate,
+                RefreshToken = token.RefreshToken??"",
+                UserId = 0
             });
             return token;
         }

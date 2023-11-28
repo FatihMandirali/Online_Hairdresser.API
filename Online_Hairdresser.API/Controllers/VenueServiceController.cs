@@ -9,7 +9,7 @@ namespace Online_Hairdresser.API.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize(Roles = "User")]
+[Authorize(Roles = "User,General")]
 public class VenueServiceController:BaseController
 {
    private readonly IVenueServicesService _venueServicesService;
@@ -19,11 +19,11 @@ public class VenueServiceController:BaseController
       _venueServicesService = venueServicesService;
    }
    
-   [HttpGet("{id}")]
-   public async Task<BaseResponse<List<VenueServiceResponse>>> List(int id)
+   [HttpGet]
+   public async Task<BaseResponse<List<VenueServiceResponse>>> List([FromQuery]int? venueId)
    {
       var baseUri = $"{Request.Scheme}://{Request.Host}/";
-      var response = await _venueServicesService.VenueServiceList(id,baseUri);
+      var response = await _venueServicesService.VenueServiceList(venueId,baseUri);
       return new BaseResponse<List<VenueServiceResponse>>(ProcessStatusEnum.Success, null, response);
    }
    

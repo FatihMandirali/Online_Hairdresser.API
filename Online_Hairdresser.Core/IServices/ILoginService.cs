@@ -7,5 +7,7 @@ namespace Online_Hairdresser.Core.IServices
     {
         Task<AccessToken> Login(LoginRequest request);
         Task<AccessToken> RefreshToken(RefreshTokenRequest request);
+        Task<AccessToken> GeneralLogin();
+        Task<AccessToken> GeneralRefreshToken(RefreshTokenRequest request);
     }
 }
