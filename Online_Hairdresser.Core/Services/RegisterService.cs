@@ -34,7 +34,7 @@ public class RegisterService:IRegisterService
         user.Version = registerRequest.Version;
         user.Platform = registerRequest.Platform;
         user.Phone = registerRequest.Phone;
-        user.Password = BC.HashPassword("registerRequest.Password");
+        user.Password = BC.HashPassword(registerRequest.Password);
         await _userService.AddAsync(user);
     }
 }
